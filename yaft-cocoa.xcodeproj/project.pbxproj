@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		497169B420C96B4600190DA9 /* color.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A020C96B4600190DA9 /* color.c */; };
+		497169B520C96B4600190DA9 /* parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A120C96B4600190DA9 /* parse.c */; };
+		497169B620C96B4600190DA9 /* csi.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A320C96B4600190DA9 /* csi.c */; };
+		497169B720C96B4600190DA9 /* conf.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A720C96B4600190DA9 /* conf.c */; };
+		497169B820C96B4600190DA9 /* terminal.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A820C96B4600190DA9 /* terminal.c */; };
+		497169B920C96B4600190DA9 /* yaft.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A920C96B4600190DA9 /* yaft.c */; };
+		497169BA20C96B4600190DA9 /* glyph.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169AA20C96B4600190DA9 /* glyph.c */; };
+		497169BB20C96B4600190DA9 /* osx.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169AF20C96B4600190DA9 /* osx.c */; };
+		497169BC20C96B4600190DA9 /* esc.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169B120C96B4600190DA9 /* esc.c */; };
+		497169BD20C96B4600190DA9 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169B320C96B4600190DA9 /* util.c */; };
+		497169BF20C96BB000190DA9 /* Yaft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497169BE20C96BB000190DA9 /* Yaft.swift */; };
+		49C8D9C520C899BE00DCF1FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D9C420C899BE00DCF1FB /* AppDelegate.swift */; };
+		49C8D9C720C899BF00DCF1FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C8D9C620C899BF00DCF1FB /* Assets.xcassets */; };
+		49C8D9CA20C899BF00DCF1FB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C8D9C820C899BF00DCF1FB /* MainMenu.xib */; };
+		49C8D9D320C89A3600DCF1FB /* YaftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D9D220C89A3600DCF1FB /* YaftView.swift */; };
+		49C8D9D520C89A4A00DCF1FB /* YaftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D9D420C89A4A00DCF1FB /* YaftController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		497169A020C96B4600190DA9 /* color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = color.c; sourceTree = "<group>"; };
+		497169A120C96B4600190DA9 /* parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parse.c; sourceTree = "<group>"; };
+		497169A220C96B4600190DA9 /* esc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = esc.h; sourceTree = "<group>"; };
+		497169A320C96B4600190DA9 /* csi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = csi.c; sourceTree = "<group>"; };
+		497169A420C96B4600190DA9 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		497169A520C96B4600190DA9 /* terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = terminal.h; sourceTree = "<group>"; };
+		497169A620C96B4600190DA9 /* glyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glyph.h; sourceTree = "<group>"; };
+		497169A720C96B4600190DA9 /* conf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = conf.c; sourceTree = "<group>"; };
+		497169A820C96B4600190DA9 /* terminal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = terminal.c; sourceTree = "<group>"; };
+		497169A920C96B4600190DA9 /* yaft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yaft.c; sourceTree = "<group>"; };
+		497169AA20C96B4600190DA9 /* glyph.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glyph.c; sourceTree = "<group>"; };
+		497169AB20C96B4600190DA9 /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
+		497169AC20C96B4600190DA9 /* osx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osx.h; sourceTree = "<group>"; };
+		497169AD20C96B4600190DA9 /* parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parse.h; sourceTree = "<group>"; };
+		497169AE20C96B4600190DA9 /* conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conf.h; sourceTree = "<group>"; };
+		497169AF20C96B4600190DA9 /* osx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = osx.c; sourceTree = "<group>"; };
+		497169B020C96B4600190DA9 /* csi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csi.h; sourceTree = "<group>"; };
+		497169B120C96B4600190DA9 /* esc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = esc.c; sourceTree = "<group>"; };
+		497169B220C96B4600190DA9 /* yaft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = yaft.h; sourceTree = "<group>"; };
+		497169B320C96B4600190DA9 /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
+		497169BE20C96BB000190DA9 /* Yaft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yaft.swift; sourceTree = "<group>"; };
+		49C8D9C120C899BE00DCF1FB /* yaft-cocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "yaft-cocoa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49C8D9C420C899BE00DCF1FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		49C8D9C620C899BF00DCF1FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49C8D9C920C899BF00DCF1FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		49C8D9CB20C899BF00DCF1FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49C8D9CC20C899BF00DCF1FB /* yaft_cocoa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yaft_cocoa.entitlements; sourceTree = "<group>"; };
+		49C8D9D220C89A3600DCF1FB /* YaftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaftView.swift; sourceTree = "<group>"; };
+		49C8D9D420C89A4A00DCF1FB /* YaftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaftController.swift; sourceTree = "<group>"; };
+		49C8D9F520C89D2F00DCF1FB /* yaft-cocoa-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "yaft-cocoa-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49C8D9BE20C899BE00DCF1FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4971699F20C96ACA00190DA9 /* yaft */ = {
+			isa = PBXGroup;
+			children = (
+				497169A020C96B4600190DA9 /* color.c */,
+				497169AB20C96B4600190DA9 /* color.h */,
+				497169A720C96B4600190DA9 /* conf.c */,
+				497169AE20C96B4600190DA9 /* conf.h */,
+				497169A320C96B4600190DA9 /* csi.c */,
+				497169B020C96B4600190DA9 /* csi.h */,
+				497169B120C96B4600190DA9 /* esc.c */,
+				497169A220C96B4600190DA9 /* esc.h */,
+				497169AA20C96B4600190DA9 /* glyph.c */,
+				497169A620C96B4600190DA9 /* glyph.h */,
+				497169AF20C96B4600190DA9 /* osx.c */,
+				497169AC20C96B4600190DA9 /* osx.h */,
+				497169A120C96B4600190DA9 /* parse.c */,
+				497169AD20C96B4600190DA9 /* parse.h */,
+				497169A820C96B4600190DA9 /* terminal.c */,
+				497169A520C96B4600190DA9 /* terminal.h */,
+				497169B320C96B4600190DA9 /* util.c */,
+				497169A420C96B4600190DA9 /* util.h */,
+				497169A920C96B4600190DA9 /* yaft.c */,
+				497169B220C96B4600190DA9 /* yaft.h */,
+			);
+			path = yaft;
+			sourceTree = "<group>";
+		};
+		49C8D9B820C899BE00DCF1FB = {
+			isa = PBXGroup;
+			children = (
+				49C8D9C320C899BE00DCF1FB /* yaft-cocoa */,
+				49C8D9C220C899BE00DCF1FB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		49C8D9C220C899BE00DCF1FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49C8D9C120C899BE00DCF1FB /* yaft-cocoa.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49C8D9C320C899BE00DCF1FB /* yaft-cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				4971699F20C96ACA00190DA9 /* yaft */,
+				49C8D9C420C899BE00DCF1FB /* AppDelegate.swift */,
+				49C8D9C620C899BF00DCF1FB /* Assets.xcassets */,
+				49C8D9C820C899BF00DCF1FB /* MainMenu.xib */,
+				49C8D9D220C89A3600DCF1FB /* YaftView.swift */,
+				497169BE20C96BB000190DA9 /* Yaft.swift */,
+				49C8D9D420C89A4A00DCF1FB /* YaftController.swift */,
+				49C8D9CB20C899BF00DCF1FB /* Info.plist */,
+				49C8D9CC20C899BF00DCF1FB /* yaft_cocoa.entitlements */,
+				49C8D9F520C89D2F00DCF1FB /* yaft-cocoa-Bridging-Header.h */,
+			);
+			path = "yaft-cocoa";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49C8D9C020C899BE00DCF1FB /* yaft-cocoa */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49C8D9CF20C899BF00DCF1FB /* Build configuration list for PBXNativeTarget "yaft-cocoa" */;
+			buildPhases = (
+				49C8D9BD20C899BE00DCF1FB /* Sources */,
+				49C8D9BE20C899BE00DCF1FB /* Frameworks */,
+				49C8D9BF20C899BE00DCF1FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "yaft-cocoa";
+			productName = "yaft-cocoa";
+			productReference = 49C8D9C120C899BE00DCF1FB /* yaft-cocoa.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49C8D9B920C899BE00DCF1FB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = uobikiemukot;
+				TargetAttributes = {
+					49C8D9C020C899BE00DCF1FB = {
+						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 0940;
+					};
+				};
+			};
+			buildConfigurationList = 49C8D9BC20C899BE00DCF1FB /* Build configuration list for PBXProject "yaft-cocoa" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49C8D9B820C899BE00DCF1FB;
+			productRefGroup = 49C8D9C220C899BE00DCF1FB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49C8D9C020C899BE00DCF1FB /* yaft-cocoa */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49C8D9BF20C899BE00DCF1FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49C8D9C720C899BF00DCF1FB /* Assets.xcassets in Resources */,
+				49C8D9CA20C899BF00DCF1FB /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49C8D9BD20C899BE00DCF1FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				497169BD20C96B4600190DA9 /* util.c in Sources */,
+				497169BB20C96B4600190DA9 /* osx.c in Sources */,
+				49C8D9D520C89A4A00DCF1FB /* YaftController.swift in Sources */,
+				49C8D9D320C89A3600DCF1FB /* YaftView.swift in Sources */,
+				49C8D9C520C899BE00DCF1FB /* AppDelegate.swift in Sources */,
+				497169BF20C96BB000190DA9 /* Yaft.swift in Sources */,
+				497169B620C96B4600190DA9 /* csi.c in Sources */,
+				497169B420C96B4600190DA9 /* color.c in Sources */,
+				497169B720C96B4600190DA9 /* conf.c in Sources */,
+				497169B520C96B4600190DA9 /* parse.c in Sources */,
+				497169B820C96B4600190DA9 /* terminal.c in Sources */,
+				497169BC20C96B4600190DA9 /* esc.c in Sources */,
+				497169BA20C96B4600190DA9 /* glyph.c in Sources */,
+				497169B920C96B4600190DA9 /* yaft.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		49C8D9C820C899BF00DCF1FB /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49C8D9C920C899BF00DCF1FB /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		49C8D9CD20C899BF00DCF1FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		49C8D9CE20C899BF00DCF1FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		49C8D9D020C899BF00DCF1FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "yaft-cocoa/yaft_cocoa.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "yaft-cocoa/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uobikiemukot.yaft-cocoa";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "yaft-cocoa/yaft-cocoa-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		49C8D9D120C899BF00DCF1FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "yaft-cocoa/yaft_cocoa.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "yaft-cocoa/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uobikiemukot.yaft-cocoa";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "yaft-cocoa/yaft-cocoa-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49C8D9BC20C899BE00DCF1FB /* Build configuration list for PBXProject "yaft-cocoa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49C8D9CD20C899BF00DCF1FB /* Debug */,
+				49C8D9CE20C899BF00DCF1FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49C8D9CF20C899BF00DCF1FB /* Build configuration list for PBXNativeTarget "yaft-cocoa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49C8D9D020C899BF00DCF1FB /* Debug */,
+				49C8D9D120C899BF00DCF1FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49C8D9B920C899BE00DCF1FB /* Project object */;
+}
