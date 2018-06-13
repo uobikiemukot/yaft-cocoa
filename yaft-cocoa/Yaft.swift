@@ -28,7 +28,6 @@ class Yaft: NSObject {
     }
     
     func writeToPseudoTerminal(str: String) {
-        print("writing: " + str)
         c_write(str, str.utf8.count)
     }
     
