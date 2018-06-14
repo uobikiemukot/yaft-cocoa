@@ -683,18 +683,18 @@
         <window title="yaft-cocoa" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="650" y="340" width="650" height="394"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="650" height="394"/>
-            <value key="maxSize" type="size" width="650" height="394"/>
-            <value key="minFullScreenContentSize" type="size" width="650" height="394"/>
-            <value key="maxFullScreenContentSize" type="size" width="650" height="394"/>
+            <rect key="contentRect" x="165" y="90" width="970" height="586"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <value key="minSize" type="size" width="970" height="586"/>
+            <value key="maxSize" type="size" width="970" height="586"/>
+            <value key="minFullScreenContentSize" type="size" width="970" height="586"/>
+            <value key="maxFullScreenContentSize" type="size" width="970" height="586"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ" customClass="YaftView" customModule="yaft_cocoa" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="650" height="394"/>
+                <rect key="frame" x="0.0" y="0.0" width="970" height="586"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uoy-4A-fr8">
-                        <rect key="frame" x="5" y="5" width="640" height="384"/>
+                        <rect key="frame" x="5" y="5" width="960" height="576"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="enr-7G-H98"/>
                     </imageView>
