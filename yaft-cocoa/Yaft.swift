@@ -5,8 +5,8 @@ class Yaft: NSObject {
     let buf: UnsafeMutablePointer<UInt8>!
     let bufSize: Int
     let bytesPerRow: Int
-    let width: Int  = 960
-    let height: Int = 576
+    let width: Int  = 1280
+    let height: Int = 768
 
     override init() {
         if !c_init(Int32(width), Int32(height)) {
