@@ -142,6 +142,13 @@ fb_init_failed:
 	return false;
 }
 
+void c_die()
+{
+	signal_die();
+	term_die(&term);
+	fb_die(&fb);
+}
+
 bool c_select()
 {
 	/* global*/

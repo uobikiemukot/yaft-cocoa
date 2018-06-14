@@ -180,6 +180,7 @@ void signal_die(void);
 bool fork_and_exec(int *master, int lines, int cols);
 int check_fds(fd_set *fds, struct timespec *ts, int master);
 bool c_init(int width, int height);
+void c_die(void);
 bool c_select(void);
 void c_write(const char *str, size_t size);
 bool c_child_alive(void);
