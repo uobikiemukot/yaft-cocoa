@@ -25,6 +25,10 @@ class Yaft: NSObject {
         return c_select()
     }
 
+    func checkChildProcessIsAlive() -> Bool {
+      return c_child_alive()
+    }
+
     func writeToPseudoTerminal(str: String) {
         c_write(str, str.utf8.count)
     }
