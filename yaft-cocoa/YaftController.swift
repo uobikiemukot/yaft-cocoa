@@ -12,10 +12,14 @@ class YaftController: NSViewController {
     @IBOutlet weak var imageView: NSImageView!
 
     override func keyDown(with event: NSEvent) {
-        yaft.writeToPseudoTerminal(str: event.characters!)
+        // TODO: handle special keys (command + v, function keys, cursor keys) correctly
+        if let str = event.characters {
+            yaft.writeToPseudoTerminal(str: str)
+        }
     }
 
     override func rightMouseDown(with event: NSEvent) {
+        // send clipboard string to terminal
         if prevEventTimestamp != event.timestamp {
             let board = NSPasteboard.general
             for element in board.pasteboardItems! {
