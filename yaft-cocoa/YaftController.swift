@@ -50,6 +50,7 @@ class YaftController: NSViewController {
 
     func checkChild() {
         if !yaft.checkChildProcessIsAlive() {
+            yaft.dieTerminal()
             DispatchQueue.main.async {
                 // bad manner?
                 if let window = (NSApp.delegate as! AppDelegate).window {

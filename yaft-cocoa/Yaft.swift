@@ -22,12 +22,20 @@ class Yaft: NSObject {
         super.init()
     }
 
+    func initTerminal(width: Int, height: Int) -> Bool {
+        return c_init(Int32(width), Int32(height))
+    }
+
+    func dieTerminal() {
+        c_die()
+    }
+
     func checkPseudoTerminal() -> Bool {
         return c_select()
     }
 
     func checkChildProcessIsAlive() -> Bool {
-      return c_child_alive()
+        return c_child_alive()
     }
 
     func writeToPseudoTerminal(str: String) {
