@@ -11,9 +11,10 @@ class Yaft: NSObject {
     override init() {
         if !c_init(Int32(width), Int32(height)) {
             print("c_init() failed")
-            // terminate app?
-            //let delegate = NSApp.delegate  as! AppDelegate
-            //delegate.window.performClose("yaft model")
+            // bad manner?
+            if let window = (NSApp.delegate  as! AppDelegate).window {
+                window.performClose(nil)
+            }
         }
         buf         = fb.buf
         bufSize     = Int(fb.info.screen_size)
