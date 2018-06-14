@@ -2,7 +2,6 @@
 #include "yaft.h"
 #include "conf.h"
 #include "util.h"
-#include "glyph.c"
 
 /* terminal.h */
 void erase_cell(struct terminal_t *term, int y, int x)
