@@ -25,7 +25,6 @@ const uint32_t bit_mask[] = {
 
 volatile sig_atomic_t need_redraw = false; /* SIGUSR1: vt activated */
 volatile sig_atomic_t child_alive = false; /* SIGCHLD: child process (shell) is alive or not */
-struct termios termios_orig;
 struct framebuffer_t fb;
 struct terminal_t term;
 
@@ -43,21 +42,7 @@ void sig_handler(int signo)
 	}
 }
 
-void set_rawmode(int fd, struct termios *save_tm)
-{
-	struct termios tm;
-
-	tm = *save_tm;
-	tm.c_iflag     = tm.c_oflag = 0;
-	tm.c_cflag    &= ~CSIZE;
-	tm.c_cflag    |= CS8;
-	tm.c_lflag    &= ~(ECHO | ISIG | ICANON);
-	tm.c_cc[VMIN]  = 1; /* min data size (byte) */
-	tm.c_cc[VTIME] = 0; /* time out */
-	etcsetattr(fd, TCSAFLUSH, &tm);
-}
-
-bool tty_init(struct termios *termios_orig)
+bool signal_init()
 {
 	struct sigaction sigact;
 
@@ -69,13 +54,13 @@ bool tty_init(struct termios *termios_orig)
 	return true;
 }
 
-void tty_die(struct termios *termios_orig)
+void signal_die()
 {
- 	/* no error handling */
 	struct sigaction sigact;
 
 	memset(&sigact, 0, sizeof(struct sigaction));
 	sigact.sa_handler = SIG_DFL;
+	/* no error handling */
 	sigaction(SIGCHLD, &sigact, NULL);
 }
 
@@ -117,7 +102,6 @@ bool c_init()
 {
 	/* global */
 	extern volatile sig_atomic_t child_alive;
-	extern struct termios termios_orig;
 	extern struct framebuffer_t fb;
 	extern struct terminal_t term;
 
@@ -135,15 +119,15 @@ bool c_init()
 		goto term_init_failed;
 	}
 
-	if (!tty_init(&termios_orig)) {
+	if (!signal_init()) {
 		logging(LOG_FATAL, "tty initialize failed\n");
-		goto tty_init_failed;
+		goto signal_init_failed;
 	}
 
 	/* fork and exec shell */
 	if (!fork_and_exec(&term.fd, term.lines, term.cols)) {
 		logging(LOG_FATAL, "forkpty failed\n");
-		goto tty_init_failed;
+		goto signal_init_failed;
 	}
 	child_alive = true;
 
@@ -151,7 +135,7 @@ bool c_init()
 	return true;
 
 	/* error exit */
-tty_init_failed:
+signal_init_failed:
 	term_die(&term);
 term_init_failed:
 	fb_die(&fb);

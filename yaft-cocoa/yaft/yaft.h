@@ -170,15 +170,14 @@ extern const uint32_t bit_mask[];
 
 extern volatile sig_atomic_t need_redraw; /* SIGUSR1: vt activated */
 extern volatile sig_atomic_t child_alive; /* SIGCHLD: child process (shell) is alive or not */
-extern struct termios termios_orig;
 extern struct framebuffer_t fb;
 extern struct terminal_t term;
 
 /* yaft.c: include main function */
 void sig_handler(int signo);
 void set_rawmode(int fd, struct termios *save_tm);
-bool tty_init(struct termios *termios_orig);
-void tty_die(struct termios *termios_orig);
+bool signal_init(void);
+void signal_die(void);
 bool fork_and_exec(int *master, int lines, int cols);
 int check_fds(fd_set *fds, struct timespec *ts, int master);
 bool c_init(void);
