@@ -122,7 +122,7 @@ bool c_init()
 	extern struct terminal_t term;
 
 	/* init */
-	if (setlocale(LC_ALL, "") == NULL) /* for wcwidth() */
+	if (setlocale(LC_ALL, "ja_JP.UTF-8") == NULL) /* for wcwidth() */
 		logging(LOG_WARN, "setlocale falied\n");
 
 	if (!fb_init(&fb)) {
