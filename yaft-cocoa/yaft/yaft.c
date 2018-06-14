@@ -23,7 +23,6 @@ const uint32_t bit_mask[] = {
 	0x1FFFFFFF, 0x3FFFFFFF, 0x7FFFFFFF, 0xFFFFFFFF,
 };
 
-volatile sig_atomic_t need_redraw = false; /* SIGUSR1: vt activated */
 volatile sig_atomic_t child_alive = false; /* SIGCHLD: child process (shell) is alive or not */
 struct framebuffer_t fb;
 struct terminal_t term;

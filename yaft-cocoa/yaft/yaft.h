@@ -168,7 +168,6 @@ struct parm_t { /* for parse_arg() */
 extern const uint8_t attr_mask[];
 extern const uint32_t bit_mask[];
 
-extern volatile sig_atomic_t need_redraw; /* SIGUSR1: vt activated */
 extern volatile sig_atomic_t child_alive; /* SIGCHLD: child process (shell) is alive or not */
 extern struct framebuffer_t fb;
 extern struct terminal_t term;
