@@ -16,17 +16,15 @@ class YaftController: NSViewController {
     }
 
     override func rightMouseDown(with event: NSEvent) {
-        if prevEventTimestamp == event.timestamp {
-            return
-        }
-
-        let board = NSPasteboard.general
-        for element in board.pasteboardItems! {
-            if let str = element.string(forType: NSPasteboard.PasteboardType.string) {
-                yaft.writeToPseudoTerminal(str: str)
+        if prevEventTimestamp != event.timestamp {
+            let board = NSPasteboard.general
+            for element in board.pasteboardItems! {
+                if let str = element.string(forType: NSPasteboard.PasteboardType.string) {
+                    yaft.writeToPseudoTerminal(str: str)
+                }
             }
+            prevEventTimestamp = event.timestamp
         }
-        prevEventTimestamp = event.timestamp
     }
 
     func addEventMonitors() {
@@ -41,13 +39,12 @@ class YaftController: NSViewController {
     }
 
     func updateView() {
-        if !yaft.checkPseudoTerminal() {
-            return
-        }
-        DispatchQueue.main.async {
-            let image = self.yaft.buildImage()
-            self.imageView.image = image
-            self.imageView.needsDisplay = true
+        if yaft.checkPseudoTerminal() {
+            DispatchQueue.main.async {
+                let image = self.yaft.buildImage()
+                self.imageView.image = image
+                self.imageView.needsDisplay = true
+            }
         }
     }
 
