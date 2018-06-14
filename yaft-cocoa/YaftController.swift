@@ -51,6 +51,7 @@ class YaftController: NSViewController {
     func checkChild() {
         if !yaft.checkChildProcessIsAlive() {
             DispatchQueue.main.async {
+                // bad manner?
                 if let window = (NSApp.delegate as! AppDelegate).window {
                     window.performClose(self)
                 }
@@ -79,7 +80,7 @@ class YaftController: NSViewController {
         yaft = Yaft()
         yaftView = YaftView()
 
-        // do something...
+        // start periodic jobs
         activateTimer()
     }
 
