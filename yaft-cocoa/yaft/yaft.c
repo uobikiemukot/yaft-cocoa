@@ -126,7 +126,7 @@ bool c_init(int width, int height)
 	/* fork and exec shell */
 	if (!fork_and_exec(&term.fd, term.lines, term.cols)) {
 		logging(LOG_FATAL, "forkpty failed\n");
-		goto signal_init_failed;
+		goto fork_failed;
 	}
 	child_alive = true;
 
@@ -134,6 +134,8 @@ bool c_init(int width, int height)
 	return true;
 
 	/* error exit */
+fork_failed:
+	signal_die();
 signal_init_failed:
 	term_die(&term);
 term_init_failed:
