@@ -179,15 +179,9 @@ bool signal_init(void);
 void signal_die(void);
 bool fork_and_exec(int *master, int lines, int cols);
 int check_fds(fd_set *fds, struct timespec *ts, int master);
-bool c_init(void);
+bool c_init(int width, int height);
 bool c_select(void);
 void c_write(const char *str, size_t size);
 uint32_t c_get_color(int i);
-
-/* TODO: remove later */
-enum {
-	TERM_WIDTH  = 640,
-	TERM_HEIGHT = 384,
-};
 
 #endif /* _YAFT_H_ */

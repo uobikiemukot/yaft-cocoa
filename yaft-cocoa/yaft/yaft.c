@@ -97,7 +97,7 @@ int check_fds(fd_set *fds, struct timespec *ts, int master)
 	return epselect(master + 1, fds, NULL, NULL, ts, NULL);
 }
 
-bool c_init()
+bool c_init(int width, int height)
 {
 	/* global */
 	extern volatile sig_atomic_t child_alive;
@@ -108,12 +108,12 @@ bool c_init()
 	if (setlocale(LC_ALL, "ja_JP.UTF-8") == NULL) /* for wcwidth() */
 		logging(LOG_WARN, "setlocale falied\n");
 
-	if (!fb_init(&fb)) {
+	if (!fb_init(&fb, width, height)) {
 		logging(LOG_FATAL, "framebuffer initialize failed\n");
 		goto fb_init_failed;
 	}
 
-	if (!term_init(&term, TERM_WIDTH, TERM_HEIGHT)) {
+	if (!term_init(&term, width, height)) {
 		logging(LOG_FATAL, "terminal initialize failed\n");
 		goto term_init_failed;
 	}
