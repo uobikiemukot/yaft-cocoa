@@ -182,6 +182,5 @@ int check_fds(fd_set *fds, struct timespec *ts, int master);
 bool c_init(int width, int height);
 bool c_select(void);
 void c_write(const char *str, size_t size);
-uint32_t c_get_color(int i);
 
 #endif /* _YAFT_H_ */

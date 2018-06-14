@@ -180,11 +180,3 @@ void c_write(const char *str, size_t size)
 
 	ewrite(term.fd, str, size);
 }
-
-uint32_t c_get_color(int i)
-{
-	/* global */
-	extern const uint32_t color_list[NCOLORS];
-
-	return color_list[i];
-}
