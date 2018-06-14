@@ -66,10 +66,6 @@ bool tty_init(struct termios *termios_orig)
 	sigact.sa_flags   = SA_RESTART;
 	esigaction(SIGCHLD, &sigact, NULL);
 
-	//etcgetattr(STDIN_FILENO, termios_orig);
-	//set_rawmode(STDIN_FILENO, termios_orig);
-	//ewrite(STDIN_FILENO, "\033[?25l", 6); /* make cusor invisible */
-
 	return true;
 }
 
@@ -81,10 +77,6 @@ void tty_die(struct termios *termios_orig)
 	memset(&sigact, 0, sizeof(struct sigaction));
 	sigact.sa_handler = SIG_DFL;
 	sigaction(SIGCHLD, &sigact, NULL);
-
-	//tcsetattr(STDIN_FILENO, TCSAFLUSH, termios_orig);
-	//fflush(stdout);
-	//ewrite(STDIN_FILENO, "\033[?25h", 6); /* make cursor visible */
 }
 
 bool fork_and_exec(int *master, int lines, int cols)
@@ -142,8 +134,6 @@ bool c_init()
 		logging(LOG_FATAL, "terminal initialize failed\n");
 		goto term_init_failed;
 	}
-	//logging(LOG_DEBUG, "term.width: %d\n", term.width);
-	//logging(LOG_DEBUG, "cells[0][0].width: %d\n", term.cells[0][0].width);
 
 	if (!tty_init(&termios_orig)) {
 		logging(LOG_FATAL, "tty initialize failed\n");
@@ -180,9 +170,6 @@ bool c_select()
 	struct timespec ts;
 	uint8_t buf[BUFSIZE];
 	size_t size;
-
-	//logging(LOG_DEBUG, "term.width: %d\n", term.width);
-	//logging(LOG_DEBUG, "cells[0][0].width: %d\n", term.cells[0][0].width);
 
 	if (!child_alive)
 		return false;
