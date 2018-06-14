@@ -5,11 +5,11 @@ class Yaft: NSObject {
     let buf: UnsafeMutablePointer<UInt8>!
     let bufSize: Int
     let bytesPerRow: Int
-    let width: Int
-    let height: Int
-    
+    let width: Int  = 960
+    let height: Int = 576
+
     override init() {
-        if !c_init() {
+        if !c_init(Int32(width), Int32(height)) {
             print("c_init() failed")
             // terminate app?
             //let delegate = NSApp.delegate  as! AppDelegate
@@ -18,19 +18,17 @@ class Yaft: NSObject {
         buf         = fb.buf
         bufSize     = Int(fb.info.screen_size)
         bytesPerRow = Int(fb.info.line_length)
-        width       = Int(fb.info.width)
-        height      = Int(fb.info.height)
         super.init()
     }
-    
+
     func checkPseudoTerminal() -> Bool {
         return c_select()
     }
-    
+
     func writeToPseudoTerminal(str: String) {
         c_write(str, str.utf8.count)
     }
-    
+
     func convertColor(index: Int) -> NSColor {
         let RGBA = c_get_color(Int32(index))
         let red   = 0xFF & (RGBA >> fb.info.red.offset)
@@ -39,7 +37,7 @@ class Yaft: NSObject {
         let alpha = 0xFF & (RGBA >> fb.info.alpha.offset)
         return NSColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
     }
-    
+
     func buildImage() -> NSImage {
         let data = Data(bytes: buf, count: bufSize)
         let ciimage = CIImage(bitmapData: data, bytesPerRow: bytesPerRow, size: CGSize(width: width, height: height), format: kCIFormatRGBA8, colorSpace: nil)
