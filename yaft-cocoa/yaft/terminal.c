@@ -323,7 +323,9 @@ void term_die(struct terminal_t *term)
 
 bool term_init(struct terminal_t *term, int width, int height)
 {
-	extern const uint32_t color_list[NCOLORS]; /* global */
+	/* global */
+	extern const uint32_t color_list[NCOLORS];
+	extern const struct glyph_t glyphs[NCHARS];
 
 	term->width  = width;
 	term->height = height;
