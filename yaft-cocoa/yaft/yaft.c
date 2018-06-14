@@ -154,15 +154,9 @@ bool c_select()
 	uint8_t buf[BUFSIZE];
 	size_t size;
 
-	if (!child_alive)
-		return false;
-
-	if (check_fds(&fds, &ts, term.fd) == -1)
-		return false;
-
-	if (FD_ISSET(term.fd, &fds)
+	if ((check_fds(&fds, &ts, term.fd) > 0)
+		&& FD_ISSET(term.fd, &fds)
 		&& (size = read(term.fd, buf, BUFSIZE)) > 0) {
-
 		if (VERBOSE)
 			ewrite(STDERR_FILENO, buf, size);
 
@@ -179,4 +173,9 @@ void c_write(const char *str, size_t size)
 	extern struct terminal_t term;
 
 	ewrite(term.fd, str, size);
+}
+
+bool c_child_alive(void)
+{
+	return child_alive ? true: false;
 }
