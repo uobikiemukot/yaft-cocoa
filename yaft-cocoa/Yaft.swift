@@ -29,15 +29,6 @@ class Yaft: NSObject {
         c_write(str, str.utf8.count)
     }
 
-    func convertColor(index: Int) -> NSColor {
-        let RGBA = c_get_color(Int32(index))
-        let red   = 0xFF & (RGBA >> fb.info.red.offset)
-        let green = 0xFF & (RGBA >> fb.info.green.offset)
-        let blue  = 0xFF & (RGBA >> fb.info.blue.offset)
-        let alpha = 0xFF & (RGBA >> fb.info.alpha.offset)
-        return NSColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
-    }
-
     func buildImage() -> NSImage {
         let data = Data(bytes: buf, count: bufSize)
         let ciimage = CIImage(bitmapData: data, bytesPerRow: bytesPerRow, size: CGSize(width: width, height: height), format: kCIFormatRGBA8, colorSpace: nil)
