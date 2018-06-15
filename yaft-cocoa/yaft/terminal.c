@@ -2,7 +2,6 @@
 #include "yaft.h"
 #include "conf.h"
 #include "util.h"
-#include "glyph.c"
 
 /* terminal.h */
 void erase_cell(struct terminal_t *term, int y, int x)
@@ -44,8 +43,6 @@ int set_cell(struct terminal_t *term, int y, int x, const struct glyph_t *glyphp
 	struct cell_t cell;
 	uint8_t color_tmp;
 
-	//logging(LOG_DEBUG, "set_cell(y:%d, x:%d)\n", y, x);
-
 	cell.glyphp = glyphp;
 
 	cell.color_pair.fg = (term->attribute & attr_mask[ATTR_BOLD] && term->color_pair.fg <= 7) ?
@@ -61,9 +58,6 @@ int set_cell(struct terminal_t *term, int y, int x, const struct glyph_t *glyphp
 
 	cell.attribute = term->attribute;
 	cell.width     = glyphp->width;
-
-	//logging(LOG_DEBUG, "cell.glyphp:%p\n", cell.glyphp);
-	//logging(LOG_DEBUG, "cells[%d][%d].width: %d\n", y, x, term->cells[y][x].width);
 
 	term->cells[y][x]   = cell;
 	term->line_dirty[y] = true;
@@ -329,7 +323,9 @@ void term_die(struct terminal_t *term)
 
 bool term_init(struct terminal_t *term, int width, int height)
 {
-	extern const uint32_t color_list[NCOLORS]; /* global */
+	/* global */
+	extern const uint32_t color_list[NCOLORS];
+	extern const struct glyph_t glyphs[NCHARS];
 
 	term->width  = width;
 	term->height = height;

@@ -23,9 +23,7 @@ const uint32_t bit_mask[] = {
 	0x1FFFFFFF, 0x3FFFFFFF, 0x7FFFFFFF, 0xFFFFFFFF,
 };
 
-volatile sig_atomic_t need_redraw = false; /* SIGUSR1: vt activated */
 volatile sig_atomic_t child_alive = false; /* SIGCHLD: child process (shell) is alive or not */
-struct termios termios_orig;
 struct framebuffer_t fb;
 struct terminal_t term;
 
@@ -43,21 +41,7 @@ void sig_handler(int signo)
 	}
 }
 
-void set_rawmode(int fd, struct termios *save_tm)
-{
-	struct termios tm;
-
-	tm = *save_tm;
-	tm.c_iflag     = tm.c_oflag = 0;
-	tm.c_cflag    &= ~CSIZE;
-	tm.c_cflag    |= CS8;
-	tm.c_lflag    &= ~(ECHO | ISIG | ICANON);
-	tm.c_cc[VMIN]  = 1; /* min data size (byte) */
-	tm.c_cc[VTIME] = 0; /* time out */
-	etcsetattr(fd, TCSAFLUSH, &tm);
-}
-
-bool tty_init(struct termios *termios_orig)
+bool signal_init()
 {
 	struct sigaction sigact;
 
@@ -66,25 +50,17 @@ bool tty_init(struct termios *termios_orig)
 	sigact.sa_flags   = SA_RESTART;
 	esigaction(SIGCHLD, &sigact, NULL);
 
-	//etcgetattr(STDIN_FILENO, termios_orig);
-	//set_rawmode(STDIN_FILENO, termios_orig);
-	//ewrite(STDIN_FILENO, "\033[?25l", 6); /* make cusor invisible */
-
 	return true;
 }
 
-void tty_die(struct termios *termios_orig)
+void signal_die()
 {
- 	/* no error handling */
 	struct sigaction sigact;
 
 	memset(&sigact, 0, sizeof(struct sigaction));
 	sigact.sa_handler = SIG_DFL;
+	/* no error handling */
 	sigaction(SIGCHLD, &sigact, NULL);
-
-	//tcsetattr(STDIN_FILENO, TCSAFLUSH, termios_orig);
-	//fflush(stdout);
-	//ewrite(STDIN_FILENO, "\033[?25h", 6); /* make cursor visible */
 }
 
 bool fork_and_exec(int *master, int lines, int cols)
@@ -121,39 +97,36 @@ int check_fds(fd_set *fds, struct timespec *ts, int master)
 	return epselect(master + 1, fds, NULL, NULL, ts, NULL);
 }
 
-bool c_init()
+bool c_init(int width, int height)
 {
 	/* global */
 	extern volatile sig_atomic_t child_alive;
-	extern struct termios termios_orig;
 	extern struct framebuffer_t fb;
 	extern struct terminal_t term;
 
 	/* init */
-	if (setlocale(LC_ALL, "") == NULL) /* for wcwidth() */
+	if (setlocale(LC_ALL, "ja_JP.UTF-8") == NULL) /* for wcwidth() */
 		logging(LOG_WARN, "setlocale falied\n");
 
-	if (!fb_init(&fb)) {
+	if (!fb_init(&fb, width, height)) {
 		logging(LOG_FATAL, "framebuffer initialize failed\n");
 		goto fb_init_failed;
 	}
 
-	if (!term_init(&term, TERM_WIDTH, TERM_HEIGHT)) {
+	if (!term_init(&term, width, height)) {
 		logging(LOG_FATAL, "terminal initialize failed\n");
 		goto term_init_failed;
 	}
-	//logging(LOG_DEBUG, "term.width: %d\n", term.width);
-	//logging(LOG_DEBUG, "cells[0][0].width: %d\n", term.cells[0][0].width);
 
-	if (!tty_init(&termios_orig)) {
+	if (!signal_init()) {
 		logging(LOG_FATAL, "tty initialize failed\n");
-		goto tty_init_failed;
+		goto signal_init_failed;
 	}
 
 	/* fork and exec shell */
 	if (!fork_and_exec(&term.fd, term.lines, term.cols)) {
 		logging(LOG_FATAL, "forkpty failed\n");
-		goto tty_init_failed;
+		goto fork_failed;
 	}
 	child_alive = true;
 
@@ -161,12 +134,21 @@ bool c_init()
 	return true;
 
 	/* error exit */
-tty_init_failed:
+fork_failed:
+	signal_die();
+signal_init_failed:
 	term_die(&term);
 term_init_failed:
 	fb_die(&fb);
 fb_init_failed:
 	return false;
+}
+
+void c_die()
+{
+	signal_die();
+	term_die(&term);
+	fb_die(&fb);
 }
 
 bool c_select()
@@ -181,18 +163,9 @@ bool c_select()
 	uint8_t buf[BUFSIZE];
 	size_t size;
 
-	//logging(LOG_DEBUG, "term.width: %d\n", term.width);
-	//logging(LOG_DEBUG, "cells[0][0].width: %d\n", term.cells[0][0].width);
-
-	if (!child_alive)
-		return false;
-
-	if (check_fds(&fds, &ts, term.fd) == -1)
-		return false;
-
-	if (FD_ISSET(term.fd, &fds)
+	if ((check_fds(&fds, &ts, term.fd) > 0)
+		&& FD_ISSET(term.fd, &fds)
 		&& (size = read(term.fd, buf, BUFSIZE)) > 0) {
-
 		if (VERBOSE)
 			ewrite(STDERR_FILENO, buf, size);
 
@@ -211,10 +184,7 @@ void c_write(const char *str, size_t size)
 	ewrite(term.fd, str, size);
 }
 
-uint32_t c_get_color(int i)
+bool c_child_alive(void)
 {
-	/* global */
-	extern const uint32_t color_list[NCOLORS];
-
-	return color_list[i];
+	return child_alive ? true: false;
 }

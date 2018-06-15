@@ -7,12 +7,10 @@
 /* initialize struct fb_info_t */
 bool set_fbinfo(struct fb_info_t *info)
 {
-	info->width  = TERM_WIDTH;
-	info->height = TERM_HEIGHT;
 	info->bytes_per_pixel = BITS_PER_PIXEL / BITS_PER_BYTE;
 	info->bits_per_pixel  = BITS_PER_PIXEL;
-	info->screen_size = TERM_WIDTH * TERM_HEIGHT * info->bytes_per_pixel;
-	info->line_length = TERM_WIDTH * info->bytes_per_pixel;
+	info->screen_size = info->width * info->height * info->bytes_per_pixel;
+	info->line_length = info->width * info->bytes_per_pixel;
 
 	info->red   = (struct bitfield_t){.length = 8, .offset = 0};
 	info->green = (struct bitfield_t){.length = 8, .offset = 8};
@@ -52,9 +50,12 @@ void fb_print_info(struct fb_info_t *info)
 	logging(LOG_DEBUG, "\tbits_per_pixel:%d bytes_per_pixel:%d\n", info->bits_per_pixel, info->bytes_per_pixel);
 }
 
-bool fb_init(struct framebuffer_t *fb)
+bool fb_init(struct framebuffer_t *fb, int width, int height)
 {
 	/* os dependent initialize */
+	fb->info.width  = width;
+	fb->info.height = height;
+
 	if (!set_fbinfo(&fb->info))
 		goto set_fbinfo_failed;
 
