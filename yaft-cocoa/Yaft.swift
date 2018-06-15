@@ -1,6 +1,6 @@
 import Cocoa
 
-// wrap C API and provide swift function
+// wrapper class of yaft core library (C API)
 class Yaft: NSObject {
     let buf: UnsafeMutablePointer<UInt8>!
     let bufSize: Int
