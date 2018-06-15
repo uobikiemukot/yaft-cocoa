@@ -24,7 +24,27 @@ class YaftController: NSViewController {
     override func keyDown(with event: NSEvent) {
         // TODO: handle special keys (command + v, function keys, cursor keys) correctly
         if let str = event.characters {
-            yaft.writeToPseudoTerminal(str: str)
+            if event.modifierFlags.contains(NSEvent.ModifierFlags.command) {
+                switch str {
+                case "v":
+                    sendPasteboardString()
+                default:
+                    print("not supported")
+                }
+            } else {
+                switch event.keyCode {
+                case 126:
+                    yaft.writeToPseudoTerminal(str: "\u{1b}[A")
+                case 125:
+                    yaft.writeToPseudoTerminal(str: "\u{1b}[B")
+                case 124:
+                    yaft.writeToPseudoTerminal(str: "\u{1b}[C")
+                case 123:
+                    yaft.writeToPseudoTerminal(str: "\u{1b}[D")
+                default:
+                    yaft.writeToPseudoTerminal(str: str)
+                }
+            }
         }
     }
 
