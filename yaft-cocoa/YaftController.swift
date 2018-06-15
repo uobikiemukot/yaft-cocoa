@@ -11,6 +11,16 @@ class YaftController: NSViewController {
 
     @IBOutlet weak var imageView: NSImageView!
 
+    func sendPasteboardString() {
+        // send clipboard string to terminal
+        let board = NSPasteboard.general
+        for element in board.pasteboardItems! {
+            if let str = element.string(forType: NSPasteboard.PasteboardType.string) {
+                yaft.writeToPseudoTerminal(str: str)
+            }
+        }
+    }
+
     override func keyDown(with event: NSEvent) {
         // TODO: handle special keys (command + v, function keys, cursor keys) correctly
         if let str = event.characters {
@@ -19,14 +29,9 @@ class YaftController: NSViewController {
     }
 
     override func rightMouseDown(with event: NSEvent) {
-        // send clipboard string to terminal
+        // XXX: always (same timestamp) rightMouseDown event occurs twice...
         if prevEventTimestamp != event.timestamp {
-            let board = NSPasteboard.general
-            for element in board.pasteboardItems! {
-                if let str = element.string(forType: NSPasteboard.PasteboardType.string) {
-                    yaft.writeToPseudoTerminal(str: str)
-                }
-            }
+            sendPasteboardString()
             prevEventTimestamp = event.timestamp
         }
     }
