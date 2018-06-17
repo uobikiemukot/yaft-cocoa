@@ -209,10 +209,8 @@ void parse(struct terminal_t *term, uint8_t *buf, size_t size)
 		CTRL CHARS(DEL) : 0x7F
 		UTF-8           : 0x80 ~ 0xFF
 	*/
-	uint8_t ch;
-
 	for (int i = 0; i < size; i++) {
-		ch = buf[i];
+		uint8_t ch = buf[i];
 		if (term->esc.state == STATE_RESET) {
 			/* interrupted by illegal byte */
 			if (term->charset.following_byte > 0 && (ch < 0x80 || ch > 0xBF)) {

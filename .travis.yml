@@ -1,0 +1,13 @@
+os: osx
+osx_image: xcode9.4
+language: swift
+swift: 4.1
+xcode_project: yaft-cocoa.xcodeproj
+xcode_scheme: yaft-cocoa
+before_install:
+  - gem install xcpretty
+before_script:
+  - set -o pipefail
+script:
+  - xcodebuild -project yaft-cocoa.xcodeproj -scheme yaft-cocoa -destination 'platform=macOS,arch=x86_64' -sdk macosx10.13 | xcpretty -c
+  #- xcodebuild -target yaft-cocoa -configuration Release

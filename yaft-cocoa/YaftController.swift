@@ -26,20 +26,20 @@ class YaftController: NSViewController {
         if let str = event.characters {
             if event.modifierFlags.contains(NSEvent.ModifierFlags.command) {
                 switch str {
-                case "v":
+                case "v": // command + v
                     sendPasteboardString()
                 default:
                     print("not supported")
                 }
             } else {
                 switch event.keyCode {
-                case 126:
+                case 126: // cursor up
                     yaft.writeToPseudoTerminal(str: "\u{1b}[A")
-                case 125:
+                case 125: // cursor down
                     yaft.writeToPseudoTerminal(str: "\u{1b}[B")
-                case 124:
+                case 124: // cursor right
                     yaft.writeToPseudoTerminal(str: "\u{1b}[C")
-                case 123:
+                case 123: // cursor left
                     yaft.writeToPseudoTerminal(str: "\u{1b}[D")
                 default:
                     yaft.writeToPseudoTerminal(str: str)
@@ -49,7 +49,7 @@ class YaftController: NSViewController {
     }
 
     override func rightMouseDown(with event: NSEvent) {
-        // XXX: always (same timestamp) rightMouseDown event occurs twice...
+        // XXX: rightMouseDown event occurs twice at the same time...
         if prevEventTimestamp != event.timestamp {
             sendPasteboardString()
             prevEventTimestamp = event.timestamp
@@ -82,8 +82,8 @@ class YaftController: NSViewController {
             yaft.dieTerminal()
             DispatchQueue.main.async {
                 // bad manner?
-                if let window = (NSApp.delegate as! AppDelegate).window {
-                    window.performClose(self)
+                if let delegate = NSApplication.shared.delegate as? AppDelegate {
+                    delegate.window.performClose(self)
                 }
             }
         }

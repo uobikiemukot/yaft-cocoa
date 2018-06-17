@@ -89,13 +89,15 @@ void fb_die(struct framebuffer_t *fb)
 
 static inline void draw_line(struct framebuffer_t *fb, struct terminal_t *term, int line)
 {
-	int pos, bdf_padding, glyph_width, margin_right;
+	int pos;
 	int col, w, h;
 	uint32_t pixel;
 	struct color_pair_t color_pair;
 	struct cell_t *cellp;
 
 	for (col = term->cols - 1; col >= 0; col--) {
+		int bdf_padding, glyph_width, margin_right;
+
 		margin_right = (term->cols - 1 - col) * CELL_WIDTH;
 
 		/* target cell */
