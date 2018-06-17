@@ -41,7 +41,6 @@ void copy_cell(struct terminal_t *term, int dst_y, int dst_x, int src_y, int src
 int set_cell(struct terminal_t *term, int y, int x, const struct glyph_t *glyphp)
 {
 	struct cell_t cell;
-	uint8_t color_tmp;
 
 	cell.glyphp = glyphp;
 
@@ -51,7 +50,7 @@ int set_cell(struct terminal_t *term, int y, int x, const struct glyph_t *glyphp
 		term->color_pair.bg + BRIGHT_INC: term->color_pair.bg;
 
 	if (term->attribute & attr_mask[ATTR_REVERSE]) {
-		color_tmp          = cell.color_pair.fg;
+		uint8_t color_tmp  = cell.color_pair.fg;
 		cell.color_pair.fg = cell.color_pair.bg;
 		cell.color_pair.bg = color_tmp;
 	}
@@ -209,11 +208,9 @@ void reset_esc(struct terminal_t *term)
 
 bool push_esc(struct terminal_t *term, uint8_t ch)
 {
-	long offset;
-
 	if ((term->esc.bp - term->esc.buf) >= term->esc.size) { /* buffer limit */
 		logging(LOG_DEBUG, "escape sequence length >= %d, term.esc.buf reallocated\n", term->esc.size);
-		offset = term->esc.bp - term->esc.buf;
+		long offset = term->esc.bp - term->esc.buf;
 		term->esc.buf = erealloc(term->esc.buf, term->esc.size * 2);
 		term->esc.bp  = term->esc.buf + offset;
 		term->esc.size *= 2;
