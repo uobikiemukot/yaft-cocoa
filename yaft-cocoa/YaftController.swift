@@ -82,8 +82,8 @@ class YaftController: NSViewController {
             yaft.dieTerminal()
             DispatchQueue.main.async {
                 // bad manner?
-                if let window = (NSApp.delegate as! AppDelegate).window {
-                    window.performClose(self)
+                if let delegate = NSApplication.shared.delegate as? AppDelegate {
+                    delegate.window.performClose(self)
                 }
             }
         }

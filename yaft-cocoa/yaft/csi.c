@@ -249,7 +249,6 @@ uint8_t rgb2index(uint8_t r, uint8_t g, uint8_t b)
 	 *	ESC [ 48 : 2 : r : g : b m
 	 *	ESC [ 38 : 2 : r : g : b m
 	 */
-	int padding;
 	uint8_t index;
 
 	/* XXX: this calculation fails if color palette modified by OSC 4 */
@@ -262,7 +261,7 @@ uint8_t rgb2index(uint8_t r, uint8_t g, uint8_t b)
 				value: 0x080808 - 0xEEEEEE
 				inc  : 0x0A
 		*/
-		padding = (r - 0x08) / 0x0A;
+		int padding = (r - 0x08) / 0x0A;
 
 		if (padding >= 24)
 			/* index 231 (0xFFFFFF) is the last color of 6x6x6 cube */
@@ -323,7 +322,7 @@ void set_attr(struct terminal_t *term, struct parm_t *parm)
 	 *		40-47: select background color (color index 0-7)
 	 *		48: special foreground color selection: implemented in select_color_value()
 	 */
-	int i, num;
+	int i;
 
 	if (parm->argc <= 0) {
 		term->attribute     = ATTR_RESET;
@@ -333,7 +332,7 @@ void set_attr(struct terminal_t *term, struct parm_t *parm)
 	}
 
 	for (i = 0; i < parm->argc; i++) {
-		num = dec2num(parm->argv[i]);
+		int num = dec2num(parm->argv[i]);
 		//logging(LOG_DEBUG, "argc:%d num:%d\n", parm->argc, num);
 
 		if (num == 0) {                        /* reset all attribute and color */
@@ -384,11 +383,11 @@ void set_attr(struct terminal_t *term, struct parm_t *parm)
 
 void status_report(struct terminal_t *term, struct parm_t *parm)
 {
-	int i, num;
+	int i;
 	char buf[BUFSIZE];
 
 	for (i = 0; i < parm->argc; i++) {
-		num = dec2num(parm->argv[i]);
+		int num = dec2num(parm->argv[i]);
 		if (num == 5) {         /* terminal response: ready */
 			ewrite(term->fd, "\033[0n", 4);
 		} else if (num == 6) {  /* cursor position report */
@@ -409,10 +408,10 @@ void device_attribute(struct terminal_t *term, struct parm_t *parm)
 
 void set_mode(struct terminal_t *term, struct parm_t *parm)
 {
-	int i, mode;
+	int i;
 
 	for (i = 0; i < parm->argc; i++) {
-		mode = dec2num(parm->argv[i]);
+		int mode = dec2num(parm->argv[i]);
 		if (*(term->esc.buf + 1) != '?')
 			continue; /* not supported */
 
@@ -431,10 +430,10 @@ void set_mode(struct terminal_t *term, struct parm_t *parm)
 
 void reset_mode(struct terminal_t *term, struct parm_t *parm)
 {
-	int i, mode;
+	int i;
 
 	for (i = 0; i < parm->argc; i++) {
-		mode = dec2num(parm->argv[i]);
+		int mode = dec2num(parm->argv[i]);
 		if (*(term->esc.buf + 1) != '?')
 			continue; /* not supported */
 
@@ -482,20 +481,21 @@ void set_margin(struct terminal_t *term, struct parm_t *parm)
 
 void clear_tabstop(struct terminal_t *term, struct parm_t *parm)
 {
-	int i, j, num;
+	int i, j;
 
 	if (parm->argc <= 0) {
 		term->tabstop[term->cursor.x] = false;
-	} else {
-		for (i = 0; i < parm->argc; i++) {
-			num = dec2num(parm->argv[i]);
-			if (num == 0) {
-				term->tabstop[term->cursor.x] = false;
-			} else if (num == 3) {
-				for (j = 0; j < term->cols; j++)
-					term->tabstop[j] = false;
-				return;
-			}
+		return;
+	}
+
+	for (i = 0; i < parm->argc; i++) {
+		int num = dec2num(parm->argv[i]);
+		if (num == 0) {
+			term->tabstop[term->cursor.x] = false;
+		} else if (num == 3) {
+			for (j = 0; j < term->cols; j++)
+				term->tabstop[j] = false;
+			return;
 		}
 	}
 }

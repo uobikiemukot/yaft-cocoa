@@ -12,8 +12,8 @@ class Yaft: NSObject {
         if !c_init(Int32(width), Int32(height)) {
             print("c_init() failed")
             // bad manner?
-            if let window = (NSApp.delegate  as! AppDelegate).window {
-                window.performClose(nil)
+            if let delegate = NSApplication.shared.delegate as? AppDelegate {
+                delegate.window.performClose(nil)
             }
         }
         buf         = fb.buf
@@ -50,4 +50,5 @@ class Yaft: NSObject {
         nsimage.addRepresentation(rep)
         return nsimage
     }
+
 }
