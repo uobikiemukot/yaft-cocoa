@@ -1,21 +1,36 @@
-os: osx
-osx_image: xcode9.4
+# language
 language: swift
 swift: 4.1
+
+# xcode
+os: osx
+osx_image: xcode9.4
 xcode_project: yaft-cocoa.xcodeproj
 xcode_scheme: yaft-cocoa
+
+# misc
+env:
+  global:
+    - RELEASE_FILE="yaft-cocoa-nightly-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1).tar.gz"
+cache:
+  directories:
+    - $HOME/Library/Caches/Homebrew
+    - $HOME/.rvm/gems/ruby-2.4.3
+
+# build
 before_install:
   - gem install xcpretty
   - brew install jq
 before_script:
   - set -o pipefail
 script:
-  - xcodebuild -project yaft-cocoa.xcodeproj -scheme yaft-cocoa -destination 'platform=macOS,arch=x86_64' -sdk macosx10.13 | xcpretty -c
+  - xcodebuild -project yaft-cocoa.xcodeproj -destination 'platform=macOS,arch=x86_64' -sdk macosx10.13 -target yaft-cocoa -configuration Release | xcpretty -c
+
+# automatically create merge pull-request
 after_success:
   - ./.travis/create_merge_pr.sh
-env:
-  global:
-    - RELEASE_FILE="yaft-cocoa-nightly-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1).tar.gz"
+
+# deploy github releases
 before_deploy:
   - tar cf ${RELEASE_FILE} build/Release/yaft-cocoa.app
 deploy:
@@ -24,4 +39,6 @@ deploy:
   file: ${RELEASE_FILE}
   skip_cleanup: true
   on:
+    repo: uobikiemukot/yaft-cocoa
+    branch: develop
     tags: false
