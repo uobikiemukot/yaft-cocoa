@@ -11,7 +11,8 @@ xcode_scheme: yaft-cocoa
 # misc
 env:
   global:
-    - RELEASE_FILE="yaft-cocoa-nightly-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1).tar.gz"
+    - RELEASE_ID="$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+    - RELEASE_FILE="yaft-cocoa-nightly-${RELEASE_ID}.tar.gz"
 cache:
   directories:
     - $HOME/Library/Caches/Homebrew
@@ -32,6 +33,9 @@ after_success:
 
 # deploy github releases
 before_deploy:
+  - git config --local user.name "uobikiemukot"
+  - git config --local user.email "uobikiemukot@gmail.com"
+  - git tag "travis-${RELEASE_ID}"
   - tar cf ${RELEASE_FILE} build/Release/yaft-cocoa.app
 deploy:
   provider: releases
@@ -41,4 +45,3 @@ deploy:
   on:
     repo: uobikiemukot/yaft-cocoa
     branch: develop
-    tags: false
