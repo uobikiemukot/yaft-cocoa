@@ -11,6 +11,17 @@ before_script:
   - set -o pipefail
 script:
   - xcodebuild -project yaft-cocoa.xcodeproj -scheme yaft-cocoa -destination 'platform=macOS,arch=x86_64' -sdk macosx10.13 | xcpretty -c
-  #- xcodebuild -target yaft-cocoa -configuration Release
 after_success:
   - ./.travis/create_merge_pr.sh
+env:
+  global:
+    - RELEASE_FILE="yaft-cocoa-nightly-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1).tar.gz"
+before_deploy:
+  - tar cf ${RELEASE_FILE} build/Release/yaft-cocoa.app
+deploy:
+  provider: releases
+  api_key: ${GITHUB_TOKEN}
+  file: ${RELEASE_FILE}
+  skip_cleanup: true
+  on:
+    tags: false
