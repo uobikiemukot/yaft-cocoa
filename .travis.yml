@@ -12,6 +12,10 @@ xcode_scheme: yaft-cocoa
 env:
   global:
     - RELEASE_FILE="yaft-cocoa-nightly-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1).tar.gz"
+cache:
+  directories:
+    - $HOME/Library/Caches/Homebrew
+    - $HOME/.rvm/gems/ruby-2.4.3
 
 # build
 before_install:
