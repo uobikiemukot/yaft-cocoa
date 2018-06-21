@@ -4,10 +4,12 @@ class YaftController: NSViewController {
 
     let yaft: Yaft         = Yaft()
     let yaftView: YaftView = YaftView()
+    let utility: Utility   = Utility()
 
     let updateViewTimer = DispatchSource.makeTimerSource()
     let checkChildTimer = DispatchSource.makeTimerSource()
     var prevEventTimestamp: TimeInterval = 0.0
+    var commandKeyFlag = false
 
     @IBOutlet weak var imageView: NSImageView!
 
@@ -21,42 +23,36 @@ class YaftController: NSViewController {
         }
     }
 
+    override func flagsChanged(with event: NSEvent) {
+        if event.modifierFlags.contains(NSEvent.ModifierFlags.command) {
+            commandKeyFlag = true
+        } else {
+            commandKeyFlag = false
+        }
+    }
+
     override func keyDown(with event: NSEvent) {
         // TODO: handle special keys (command + v, function keys, cursor keys) correctly
-        if let str = event.characters {
-            if event.modifierFlags.contains(NSEvent.ModifierFlags.command) {
-                switch str {
-                case "v": // command + v
-                    sendPasteboardString()
-                default:
-                    print("not supported")
-                }
-            } else {
-                switch event.keyCode {
-                case 126: // cursor up
-                    yaft.writeToPseudoTerminal("\u{1b}[A")
-                case 125: // cursor down
-                    yaft.writeToPseudoTerminal("\u{1b}[B")
-                case 124: // cursor right
-                    yaft.writeToPseudoTerminal("\u{1b}[C")
-                case 123: // cursor left
-                    yaft.writeToPseudoTerminal("\u{1b}[D")
-                default:
-                    yaft.writeToPseudoTerminal(str)
-                }
-            }
+        if let chars = event.characters {
+            let str = utility.handleKeyEvent(chars, commandKeyFlag)
+            yaft.writeToPseudoTerminal(str)
         }
     }
 
     override func rightMouseDown(with event: NSEvent) {
         // XXX: rightMouseDown event occurs twice at the same time...
         if prevEventTimestamp != event.timestamp {
-            sendPasteboardString()
+            let str = utility.getPasteboardString()
+            yaft.writeToPseudoTerminal(str)
             prevEventTimestamp = event.timestamp
         }
     }
 
     func addEventMonitors() {
+        NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) {
+            self.flagsChanged(with: $0)
+            return $0
+        }
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
             return $0
