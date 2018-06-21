@@ -38,7 +38,7 @@ class Yaft: NSObject {
         return c_child_alive()
     }
 
-    func writeToPseudoTerminal(str: String) {
+    func writeToPseudoTerminal(_ str: String) {
         c_write(str, str.utf8.count)
     }
 

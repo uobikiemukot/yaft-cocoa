@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		494514E320D87FF700161858 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494514E220D87FF700161858 /* Utility.swift */; };
 		497169B420C96B4600190DA9 /* color.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A020C96B4600190DA9 /* color.c */; };
 		497169B520C96B4600190DA9 /* parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A120C96B4600190DA9 /* parse.c */; };
 		497169B620C96B4600190DA9 /* csi.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169A320C96B4600190DA9 /* csi.c */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		494514E220D87FF700161858 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		497169A020C96B4600190DA9 /* color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = color.c; sourceTree = "<group>"; };
 		497169A120C96B4600190DA9 /* parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parse.c; sourceTree = "<group>"; };
 		497169A220C96B4600190DA9 /* esc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = esc.h; sourceTree = "<group>"; };
@@ -55,7 +57,7 @@
 		49C8D9CC20C899BF00DCF1FB /* yaft_cocoa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yaft_cocoa.entitlements; sourceTree = "<group>"; };
 		49C8D9D220C89A3600DCF1FB /* YaftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaftView.swift; sourceTree = "<group>"; };
 		49C8D9D420C89A4A00DCF1FB /* YaftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaftController.swift; sourceTree = "<group>"; };
-		49C8D9F520C89D2F00DCF1FB /* yaft-cocoa-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "yaft-cocoa-Bridging-Header.h"; sourceTree = "<group>"; };
+		49C8D9F520C89D2F00DCF1FB /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +124,10 @@
 				49C8D9D220C89A3600DCF1FB /* YaftView.swift */,
 				497169BE20C96BB000190DA9 /* Yaft.swift */,
 				49C8D9D420C89A4A00DCF1FB /* YaftController.swift */,
+				494514E220D87FF700161858 /* Utility.swift */,
 				49C8D9CB20C899BF00DCF1FB /* Info.plist */,
 				49C8D9CC20C899BF00DCF1FB /* yaft_cocoa.entitlements */,
-				49C8D9F520C89D2F00DCF1FB /* yaft-cocoa-Bridging-Header.h */,
+				49C8D9F520C89D2F00DCF1FB /* Bridging-Header.h */,
 			);
 			path = "yaft-cocoa";
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				49C8D9D520C89A4A00DCF1FB /* YaftController.swift in Sources */,
 				49C8D9D320C89A3600DCF1FB /* YaftView.swift in Sources */,
 				49C8D9C520C899BE00DCF1FB /* AppDelegate.swift in Sources */,
+				494514E320D87FF700161858 /* Utility.swift in Sources */,
 				497169BF20C96BB000190DA9 /* Yaft.swift in Sources */,
 				497169B620C96B4600190DA9 /* csi.c in Sources */,
 				497169B420C96B4600190DA9 /* color.c in Sources */,
@@ -363,7 +367,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uobikiemukot.yaft-cocoa";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "yaft-cocoa/yaft-cocoa-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "yaft-cocoa/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
@@ -386,7 +390,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uobikiemukot.yaft-cocoa";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "yaft-cocoa/yaft-cocoa-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "yaft-cocoa/Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
