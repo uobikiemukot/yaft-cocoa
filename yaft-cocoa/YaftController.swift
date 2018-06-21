@@ -2,8 +2,8 @@ import Cocoa
 
 class YaftController: NSViewController {
 
-    var yaft: Yaft!
-    var yaftView: YaftView!
+    let yaft: Yaft         = Yaft()
+    let yaftView: YaftView = YaftView()
 
     let updateViewTimer = DispatchSource.makeTimerSource()
     let checkChildTimer = DispatchSource.makeTimerSource()
@@ -103,12 +103,9 @@ class YaftController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do view setup here.
         addEventMonitors()
-
-        // initialize view and model
-        yaft = Yaft()
-        yaftView = YaftView()
 
         // start periodic jobs
         activateTimer()
