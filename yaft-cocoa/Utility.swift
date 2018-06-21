@@ -1,22 +1,24 @@
 import Cocoa
 
 // helper class for event handling
-class Utility: NSObject {
+struct Utility {
 
-    let UnicodeToEscSeq: [Int:String] = [
+    let UnicodeToEscSeq: [Int: String] = [
+        // cursor keys
         NSUpArrowFunctionKey:    "\u{1b}[A",
         NSDownArrowFunctionKey:  "\u{1b}[B",
         NSRightArrowFunctionKey: "\u{1b}[C",
         NSLeftArrowFunctionKey:  "\u{1b}[D",
-        NSF1FunctionKey: "\u{1b}[[A",
-        NSF2FunctionKey: "\u{1b}[[B",
-        NSF3FunctionKey: "\u{1b}[[C",
-        NSF4FunctionKey: "\u{1b}[[D",
-        NSF5FunctionKey: "\u{1b}[[E",
-        NSF6FunctionKey: "\u{1b}[17~",
-        NSF7FunctionKey: "\u{1b}[18~",
-        NSF8FunctionKey: "\u{1b}[19~",
-        NSF9FunctionKey: "\u{1b}[20~",
+        // function keys
+        NSF1FunctionKey:  "\u{1b}[[A",
+        NSF2FunctionKey:  "\u{1b}[[B",
+        NSF3FunctionKey:  "\u{1b}[[C",
+        NSF4FunctionKey:  "\u{1b}[[D",
+        NSF5FunctionKey:  "\u{1b}[[E",
+        NSF6FunctionKey:  "\u{1b}[17~",
+        NSF7FunctionKey:  "\u{1b}[18~",
+        NSF8FunctionKey:  "\u{1b}[19~",
+        NSF9FunctionKey:  "\u{1b}[20~",
         NSF10FunctionKey: "\u{1b}[21~",
         NSF11FunctionKey: "\u{1b}[23~",
         NSF12FunctionKey: "\u{1b}[24~",
