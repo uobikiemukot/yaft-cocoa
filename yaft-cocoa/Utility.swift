@@ -4,10 +4,12 @@ import Cocoa
 struct Utility {
 
     let UnicodeToEscSeq: [Int:String] = [
+        // cursor keys
         NSUpArrowFunctionKey:    "\u{1b}[A",
         NSDownArrowFunctionKey:  "\u{1b}[B",
         NSRightArrowFunctionKey: "\u{1b}[C",
         NSLeftArrowFunctionKey:  "\u{1b}[D",
+        // function keys
         NSF1FunctionKey: "\u{1b}[[A",
         NSF2FunctionKey: "\u{1b}[[B",
         NSF3FunctionKey: "\u{1b}[[C",
