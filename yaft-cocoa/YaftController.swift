@@ -16,7 +16,7 @@ class YaftController: NSViewController {
         let board = NSPasteboard.general
         for element in board.pasteboardItems! {
             if let str = element.string(forType: NSPasteboard.PasteboardType.string) {
-                yaft.writeToPseudoTerminal(str: str)
+                yaft.writeToPseudoTerminal(str)
             }
         }
     }
@@ -34,15 +34,15 @@ class YaftController: NSViewController {
             } else {
                 switch event.keyCode {
                 case 126: // cursor up
-                    yaft.writeToPseudoTerminal(str: "\u{1b}[A")
+                    yaft.writeToPseudoTerminal("\u{1b}[A")
                 case 125: // cursor down
-                    yaft.writeToPseudoTerminal(str: "\u{1b}[B")
+                    yaft.writeToPseudoTerminal("\u{1b}[B")
                 case 124: // cursor right
-                    yaft.writeToPseudoTerminal(str: "\u{1b}[C")
+                    yaft.writeToPseudoTerminal("\u{1b}[C")
                 case 123: // cursor left
-                    yaft.writeToPseudoTerminal(str: "\u{1b}[D")
+                    yaft.writeToPseudoTerminal("\u{1b}[D")
                 default:
-                    yaft.writeToPseudoTerminal(str: str)
+                    yaft.writeToPseudoTerminal(str)
                 }
             }
         }
