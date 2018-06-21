@@ -1,7 +1,7 @@
 import Cocoa
 
 // helper class for event handling
-class Utility: NSObject {
+struct Utility {
 
     let UnicodeToEscSeq: [Int:String] = [
         NSUpArrowFunctionKey:    "\u{1b}[A",
