@@ -17,6 +17,10 @@ cache:
   directories:
     - $HOME/Library/Caches/Homebrew
     - $HOME/.rvm/gems/ruby-2.4.3
+branches:
+  only:
+    # branchs through pull-request are built
+    - master
 
 # build
 before_install:
