@@ -13,11 +13,11 @@ enum {
 static inline void split_rgb(uint32_t color, uint8_t *r, uint8_t *g, uint8_t *b);
 */
 static inline int sixel_bitmap(struct terminal_t *term, struct sixel_canvas_t *sc, uint8_t bitmap);
-static inline int sixel_repeat(struct terminal_t *term, struct sixel_canvas_t *sc, char *buf);
-static inline int sixel_attr(struct sixel_canvas_t *sc, char *buf);
+static inline uintptr_t sixel_repeat(struct terminal_t *term, struct sixel_canvas_t *sc, char *buf);
+static inline uintptr_t sixel_attr(struct sixel_canvas_t *sc, char *buf);
 static inline uint32_t hue2rgb(int n1, int n2, int hue);
 static inline uint32_t hls2rgb(int hue, int lum, int sat);
-static inline int sixel_color(struct sixel_canvas_t *sc, char *buf);
+static inline uintptr_t sixel_color(struct sixel_canvas_t *sc, char *buf);
 static inline int sixel_cr(struct sixel_canvas_t *sc);
 static inline int sixel_nl(struct sixel_canvas_t *sc);
 void sixel_parse_data(struct terminal_t *term, struct sixel_canvas_t *sc, char *start_buf);

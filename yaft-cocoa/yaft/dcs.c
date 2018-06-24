@@ -35,10 +35,10 @@ static inline int sixel_bitmap(struct terminal_t *term, struct sixel_canvas_t *s
 	return 1;
 }
 
-static inline int sixel_repeat(struct terminal_t *term, struct sixel_canvas_t *sc, char *buf)
+static inline uintptr_t sixel_repeat(struct terminal_t *term, struct sixel_canvas_t *sc, char *buf)
 {
 	int count;
-	size_t length;
+	uintptr_t length;
 	char *cp, tmp[BUFSIZE];
 
 	cp = buf + 1; /* skip '!' itself */
@@ -63,10 +63,10 @@ static inline int sixel_repeat(struct terminal_t *term, struct sixel_canvas_t *s
 	return length + 1;
 }
 
-static inline int sixel_attr(struct sixel_canvas_t *sc, char *buf)
+static inline uintptr_t sixel_attr(struct sixel_canvas_t *sc, char *buf)
 {
 	char *cp, tmp[BUFSIZE];
-	size_t length;
+	uintptr_t length;
 	struct parm_t parm;
 
 	cp = buf + 1;
@@ -131,11 +131,11 @@ static inline uint32_t hls2rgb(int hue, int lum, int sat)
 	return (r << 16) + (g << 8) + b;
 }
 
-static inline int sixel_color(struct sixel_canvas_t *sc, char *buf)
+static inline uintptr_t sixel_color(struct sixel_canvas_t *sc, char *buf)
 {
 	char *cp, tmp[BUFSIZE];
 	int index, type;
-	size_t length;
+	uintptr_t length;
 	uint16_t v1, v2, v3;
 	uint32_t color;
 	struct parm_t parm;
@@ -250,7 +250,7 @@ void sixel_parse_data(struct terminal_t *term, struct sixel_canvas_t *sc, char *
 			t (hex 74) represents the binary value 11 0101.
 			~ (hex 7E) represents the binary value 11 1111.
 	*/
-	int size = 0;
+	uintptr_t size = 0;
 	char *cp, *end_buf;
 	uint8_t bitmap;
 
