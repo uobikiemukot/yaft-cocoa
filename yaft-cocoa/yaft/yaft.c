@@ -66,7 +66,8 @@ void signal_die()
 bool fork_and_exec(int *master, int lines, int cols)
 {
 	extern const char *shell_cmd; /* defined in conf.h */
-	char *shell_env;
+	char opt[BUFSIZE];
+	const char *shell_env, *cmd;
 	pid_t pid;
 	struct winsize ws = {.ws_row = lines, .ws_col = cols,
 		/* XXX: this variables are UNUSED (man tty_ioctl),
@@ -78,10 +79,10 @@ bool fork_and_exec(int *master, int lines, int cols)
 		return false;
 	else if (pid == 0) { /* child */
 		esetenv("TERM", term_name, 1);
-		if ((shell_env = getenv("SHELL")) != NULL)
-			eexecl(shell_env);
-		else
-			eexecl(shell_cmd);
+		cmd = ((shell_env = getenv("SHELL")) != NULL) ? shell_env: shell_cmd;
+		/* XXX: append '-' before command so that shell behaves as a login shell */
+		snprintf(opt, BUFSIZE - 1, "-%s", basecmd(cmd));
+		eexecl(cmd, opt);
 		/* never reach here */
 		exit(EXIT_FAILURE);
 	}

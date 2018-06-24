@@ -1,6 +1,5 @@
 /* See LICENSE for licence details. */
 /* conf.h: define custom variables */
-/* color: index number of color_palette[] (see color.h) */
 
 /* TERM value */
 const char *term_name = "yaft-256color";
