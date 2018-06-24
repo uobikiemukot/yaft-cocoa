@@ -39,5 +39,6 @@ int my_ceil(int val, int div);
 int dec2num(char *str);
 int hex2num(char *str);
 int sum(struct parm_t *parm);
+char *basecmd(const char *cmd);
 
 #endif /* _UTIL_H_ */

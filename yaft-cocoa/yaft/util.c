@@ -391,3 +391,20 @@ int sum(struct parm_t *parm)
 
 	return sum;
 }
+
+char *basecmd(const char *cmd)
+{
+	char *cp, *ret = NULL;
+	size_t len = strlen(cmd);
+
+	cp = strchr(cmd, '/');
+	while (cp != NULL) {
+		 ret = cp;
+		 cp = strchr(cp + 1, '/');
+	}
+
+	if (ret == NULL || ret == &cmd[len - 1])
+		 return NULL;
+	else
+		 return ret + 1;
+}
