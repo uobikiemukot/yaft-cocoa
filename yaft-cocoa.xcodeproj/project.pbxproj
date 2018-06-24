@@ -19,6 +19,7 @@
 		497169BC20C96B4600190DA9 /* esc.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169B120C96B4600190DA9 /* esc.c */; };
 		497169BD20C96B4600190DA9 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 497169B320C96B4600190DA9 /* util.c */; };
 		497169BF20C96BB000190DA9 /* Yaft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497169BE20C96BB000190DA9 /* Yaft.swift */; };
+		49973B1120DF794D003D850E /* dcs.c in Sources */ = {isa = PBXBuildFile; fileRef = 49973B0F20DF794D003D850E /* dcs.c */; };
 		49C8D9C520C899BE00DCF1FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D9C420C899BE00DCF1FB /* AppDelegate.swift */; };
 		49C8D9C720C899BF00DCF1FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C8D9C620C899BF00DCF1FB /* Assets.xcassets */; };
 		49C8D9CA20C899BF00DCF1FB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C8D9C820C899BF00DCF1FB /* MainMenu.xib */; };
@@ -49,6 +50,8 @@
 		497169B220C96B4600190DA9 /* yaft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = yaft.h; sourceTree = "<group>"; };
 		497169B320C96B4600190DA9 /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
 		497169BE20C96BB000190DA9 /* Yaft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yaft.swift; sourceTree = "<group>"; };
+		49973B0F20DF794D003D850E /* dcs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dcs.c; sourceTree = "<group>"; };
+		49973B1020DF794D003D850E /* dcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dcs.h; sourceTree = "<group>"; };
 		49C8D9C120C899BE00DCF1FB /* yaft-cocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "yaft-cocoa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C8D9C420C899BE00DCF1FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C8D9C620C899BF00DCF1FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +77,8 @@
 		4971699F20C96ACA00190DA9 /* yaft */ = {
 			isa = PBXGroup;
 			children = (
+				49973B0F20DF794D003D850E /* dcs.c */,
+				49973B1020DF794D003D850E /* dcs.h */,
 				497169A020C96B4600190DA9 /* color.c */,
 				497169AB20C96B4600190DA9 /* color.h */,
 				497169A720C96B4600190DA9 /* conf.c */,
@@ -203,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49973B1120DF794D003D850E /* dcs.c in Sources */,
 				497169BD20C96B4600190DA9 /* util.c in Sources */,
 				497169BB20C96B4600190DA9 /* osx.c in Sources */,
 				49C8D9D520C89A4A00DCF1FB /* YaftController.swift in Sources */,

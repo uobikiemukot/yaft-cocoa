@@ -399,12 +399,12 @@ char *basecmd(const char *cmd)
 
 	cp = strchr(cmd, '/');
 	while (cp != NULL) {
-		 ret = cp;
-		 cp = strchr(cp + 1, '/');
+		ret = cp;
+		cp = strchr(cp + 1, '/');
 	}
 
 	if (ret == NULL || ret == &cmd[len - 1])
-		 return NULL;
+		return NULL;
 	else
-		 return ret + 1;
+		return ret + 1;
 }
