@@ -5,6 +5,7 @@
 #include "terminal.h"
 #include "esc.h"
 #include "csi.h"
+#include "dcs.h"
 
 void (*ctrl_func[CTRL_CHARS])(struct terminal_t *term) = {
 	[BS]  = bs,
@@ -116,6 +117,14 @@ void csi_sequence(struct terminal_t *term, uint8_t ch)
 	reset_esc(term);
 }
 
+void omit_string_terminator(char *bp, uint8_t ch)
+{
+	if (ch == BACKSLASH) /* ST: ESC BACKSLASH */
+		*(bp - 2) = '\0';
+	else               /* ST: BEL */
+		*(bp - 1) = '\0';
+}
+
 void osc_sequence(struct terminal_t *term, uint8_t ch)
 {
 	(void) ch;
@@ -124,7 +133,32 @@ void osc_sequence(struct terminal_t *term, uint8_t ch)
 
 void dcs_sequence(struct terminal_t *term, uint8_t ch)
 {
-	(void) ch;
+	char *cp;
+
+	omit_string_terminator(term->esc.bp, ch);
+
+	logging(LOG_DEBUG, "dcs: DCS %s\n", term->esc.buf);
+
+	/* check DCS header */
+	cp = term->esc.buf + 1; /* skip P */
+	while (cp < term->esc.bp) {
+		if (*cp == '{' || *cp == 'q')                      /* DECDLD or sixel */
+			break;
+		else if (*cp == ';' || ('0' <= *cp && *cp <= '9')) /* valid DCS header */
+			;
+		else                                               /* invalid sequence */
+			cp = term->esc.bp;
+		cp++;
+	}
+
+	if (cp != term->esc.bp) { /* header only or couldn't find final char */
+		/* parse DCS header */
+		if (*cp == 'q')
+			sixel_parse_header(term, term->esc.buf + 1);
+		else if (*cp == '{')
+			decdld_parse_header(term, term->esc.buf + 1);
+	}
+
 	reset_esc(term);
 }
 
