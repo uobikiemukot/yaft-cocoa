@@ -265,24 +265,24 @@ int esetenv(const char *name, const char *value, int overwrite)
 	return ret;
 }
 
-int eexecvp(const char *file, const char *argv[])
+int eexecvp(const char *file, char *const argv[])
 {
 	int ret;
 	errno = 0;
 
-	if ((ret = execvp(file, (char * const *) argv)) < 0)
+	if ((ret = execvp(file, argv)) < 0)
 		logging(LOG_ERROR, "execvp: %s\n", strerror(errno));
 
 	return ret;
 }
 
-int eexecl(const char *path)
+int eexecl(const char *path, const char *opt)
 {
 	int ret;
 	errno = 0;
 
 	/* XXX: assume only one argument is given */
-	if ((ret = execl(path, path, NULL)) < 0)
+	if ((ret = execl(path, opt, NULL)) < 0)
 		logging(LOG_ERROR, "execl: %s\n", strerror(errno));
 
 	return ret;

@@ -25,8 +25,8 @@ int eopenpty(int *amaster, int *aslave, char *aname,
 pid_t eforkpty(int *amaster, char *name,
 	const struct termios *termp, const struct winsize *winsize);
 int esetenv(const char *name, const char *value, int overwrite);
-int eexecvp(const char *file, const char *argv[]);
-int eexecl(const char *path);
+int eexecvp(const char *file, char *const argv[]);
+int eexecl(const char *path, const char *opt);
 long estrtol(const char *nptr, char **endptr, int base);
 
 /* parse_arg functions */
