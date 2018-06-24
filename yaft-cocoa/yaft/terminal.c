@@ -244,7 +244,7 @@ bool push_esc(struct terminal_t *term, uint8_t ch)
 	if (term->esc.state == STATE_ESC) {
 		/* format:
 			ESC  I.......I F
-				 ' '  '/'  '0'  '~'
+			     ' '  '/'  '0'  '~'
 			0x1B 0x20-0x2F 0x30-0x7E
 		*/
 		if ('0' <= ch && ch <= '~')        /* final char */

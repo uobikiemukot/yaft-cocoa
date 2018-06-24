@@ -6,19 +6,9 @@
 #include "esc.h"
 #include "dcs.h"
 
-/*
-static inline void split_rgb(uint32_t color, uint8_t *r, uint8_t *g, uint8_t *b)
-{
-	*r = bit_mask[8] & (color >> 16);
-	*g = bit_mask[8] & (color >>  8);
-	*b = bit_mask[8] & (color >>  0);
-}
-*/
-
 static inline int sixel_bitmap(struct terminal_t *term, struct sixel_canvas_t *sc, uint8_t bitmap)
 {
 	int i, offset;
-	//uint8_t r, g, b;
 
 	logging(LOG_DEBUG, "sixel_bitmap()\nbitmap:%.2X point(%d, %d)\n",
 		bitmap, sc->point.x, sc->point.y);
@@ -32,15 +22,8 @@ static inline int sixel_bitmap(struct terminal_t *term, struct sixel_canvas_t *s
 		if (offset >= BYTES_PER_PIXEL * term->width * term->height)
 			break;
 
-		if (bitmap & (0x01 << i)) {
+		if (bitmap & (0x01 << i))
 			memcpy(sc->pixmap + offset, &sc->color_table[sc->color_index], BYTES_PER_PIXEL);
-			/*
-			split_rgb(sc->color_table[sc->color_index], &r, &g, &b);
-			*(sc->pixmap + offset + 0) = b;
-			*(sc->pixmap + offset + 1) = g;
-			*(sc->pixmap + offset + 2) = r;
-			*/
-		}
 
 		offset += sc->line_length;
 	}
@@ -54,10 +37,9 @@ static inline int sixel_bitmap(struct terminal_t *term, struct sixel_canvas_t *s
 
 static inline int sixel_repeat(struct terminal_t *term, struct sixel_canvas_t *sc, char *buf)
 {
-	int i, count;
+	int count;
 	size_t length;
 	char *cp, tmp[BUFSIZE];
-	uint8_t bitmap;
 
 	cp = buf + 1; /* skip '!' itself */
 	while (isdigit(*cp)) /* skip non sixel bitmap character */
@@ -73,8 +55,8 @@ static inline int sixel_repeat(struct terminal_t *term, struct sixel_canvas_t *s
 		tmp, (unsigned) length, count, *cp);
 
 	if ('?' <= *cp && *cp <= '~') {
-		bitmap = bit_mask[BITS_PER_SIXEL] & (*cp - '?');
-		for (i = 0; i < count; i++)
+		uint8_t bitmap = bit_mask[BITS_PER_SIXEL] & (*cp - '?');
+		for (int i = 0; i < count; i++)
 			sixel_bitmap(term, sc, bitmap);
 	}
 
@@ -130,11 +112,12 @@ static inline uint32_t hue2rgb(int n1, int n2, int hue)
 static inline uint32_t hls2rgb(int hue, int lum, int sat)
 {
 	uint32_t r, g, b;
-	int magic1, magic2;
 
 	if (sat == 0) {
 		r = g = b = (lum * RGBMAX) / LSMAX;
 	} else {
+		int magic1, magic2;
+
 		if (lum <= (LSMAX / 2) )
 			magic2 = (lum * (LSMAX + sat) + (LSMAX / 2)) / LSMAX;
 		else
@@ -153,7 +136,7 @@ static inline int sixel_color(struct sixel_canvas_t *sc, char *buf)
 	char *cp, tmp[BUFSIZE];
 	int index, type;
 	size_t length;
-	uint16_t v1, v2, v3, r, g, b;
+	uint16_t v1, v2, v3;
 	uint32_t color;
 	struct parm_t parm;
 
@@ -196,6 +179,8 @@ static inline int sixel_color(struct sixel_canvas_t *sc, char *buf)
 	if (type == 1) { /* HLS */
 		color = hls2rgb(v1, v2, v3);
 	} else {
+		uint16_t r, g, b;
+
 		r = bit_mask[8] & (0xFF * v1 / 100);
 		g = bit_mask[8] & (0xFF * v2 / 100);
 		b = bit_mask[8] & (0xFF * v3 / 100);
@@ -415,25 +400,25 @@ void sixel_parse_header(struct terminal_t *term, char *start_buf)
 static inline void decdld_bitmap(struct glyph_t *glyph, uint8_t bitmap, uint8_t row, uint8_t column)
 {
 	/*
-			  MSB        LSB (glyph_t bitmap order, padding at LSB side)
-				  -> column
-	sixel bit0 ->........
-	sixel bit1 ->........
-	sixel bit2 ->....@@..
-	sixel bit3 ->...@..@.
-	sixel bit4 ->...@....
-	sixel bit5 ->...@....
-				 .@@@@@..
-				 ...@....
-				|...@....
-			row |...@....
-				v...@....
-				 ...@....
-				 ...@....
-				 ...@....
-				 ........
-				 ........
-	*/
+	 *              MSB        LSB (glyph_t bitmap order, padding at LSB side)
+	 *           --> column
+	 * sixel bit0 ->........
+	 * sixel bit1 ->........
+	 * sixel bit2 ->....@@..
+	 * sixel bit3 ->...@..@.
+	 * sixel bit4 ->...@....
+	 * sixel bit5 ->...@....
+	 *              .@@@@@..
+	 *              ...@....
+	 *             |...@....
+	 *         row |...@....
+	 *             v...@....
+	 *              ...@....
+	 *              ...@....
+	 *              ...@....
+	 *              ........
+	 *              ........
+	 */
 	int i, height_shift, width_shift;
 
 	logging(LOG_DEBUG, "bit pattern:0x%.2X\n", bitmap);
@@ -509,33 +494,33 @@ void decdld_parse_data(char *start_buf, int start_char, struct glyph_t *chars)
 void decdld_parse_header(struct terminal_t *term, char *start_buf)
 {
 	/*
-	DECDLD format
-		DCS Pfn; Pcn; Pe; Pcmw; Pss; Pt; Pcmh; Pcss; f Dscs Sxbp1 ; Sxbp2 ; .. .; Sxbpn ST
-	parameters
-		DCS : ESC (0x1B) 'P' (0x50) (DCS(8bit C1 code) is not supported)
-		Pfn : fontset (ignored)
-		Pcn : start char (0 means SPACE 0x20)
-		Pe  : erase mode
-				0: clear selectet charset
-				1: clear only redefined glyph
-				2: clear all drcs charset
-		Pcmw: max cellwidth (force CELL_WEDTH defined in glyph.h)
-		Pss : screen size (ignored)
-		Pt  : defines the glyph as text or full cell or sixel (force full cell mode)
-		      (TODO: implement sixel/text mode)
-		Pcmh: max cellheight (force CELL_HEIGHT defined in glyph.h)
-		Pcss: character set size (force: 96)
-				0: 94 gylphs charset
-				1: 96 gylphs charset
-		f   : '{' (0x7B)
-		Dscs: define character set
-				Intermediate char: SPACE (0x20) to '/' (0x2F)
-				final char       : '0' (0x30) to '~' (0x7E)
-									but allow chars between '@' (0x40) and '~' (0x7E) for DRCSMMv1
-									(ref: https://github.com/saitoha/drcsterm/blob/master/README.rst)
-		Sxbp: see parse_decdld_sixel()
-		ST  : ESC (0x1B) '\' (0x5C) or BEL (0x07)
-	*/
+	 * DECDLD format
+	 *   DCS Pfn; Pcn; Pe; Pcmw; Pss; Pt; Pcmh; Pcss; f Dscs Sxbp1 ; Sxbp2 ; .. .; Sxbpn ST
+	 * parameters
+	 *   DCS : ESC (0x1B) 'P' (0x50) (DCS(8bit C1 code) is not supported)
+	 *   Pfn : fontset (ignored)
+	 *   Pcn : start char (0 means SPACE 0x20)
+	 *   Pe  : erase mode
+	 *     0: clear selectet charset
+	 *     1: clear only redefined glyph
+	 *     2: clear all drcs charset
+	 *   Pcmw: max cellwidth (force CELL_WEDTH defined in glyph.h)
+	 *   Pss : screen size (ignored)
+	 *   Pt  : defines the glyph as text or full cell or sixel (force full cell mode)
+	 *         (TODO: implement sixel/text mode)
+	 *   Pcmh: max cellheight (force CELL_HEIGHT defined in glyph.h)
+	 *   Pcss: character set size (force: 96)
+	 *     0: 94 gylphs charset
+	 *     1: 96 gylphs charset
+	 *   f   : '{' (0x7B)
+	 *   Dscs: define character set
+	 *     Intermediate char: SPACE (0x20) to '/' (0x2F)
+	 *     final char       : '0' (0x30) to '~' (0x7E)
+	 *       but allow chars between '@' (0x40) and '~' (0x7E) for DRCSMMv1
+	 *       (ref: https://github.com/saitoha/drcsterm/blob/master/README.rst)
+	 *   Sxbp: see parse_decdld_sixel()
+	 *   ST  : ESC (0x1B) '\' (0x5C) or BEL (0x07)
+	 */
 	char *cp;
 	int start_char, erase_mode, charset;
 	struct parm_t parm;

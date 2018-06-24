@@ -92,10 +92,10 @@ enum glyph_width {
 };
 
 enum loglevel_t {
-	 LOG_DEBUG = 0,
-	 LOG_WARN,
-	 LOG_ERROR,
-	 LOG_FATAL,
+	LOG_DEBUG = 0,
+	LOG_WARN,
+	LOG_ERROR,
+	LOG_FATAL,
 };
 
 struct margin_t { uint16_t top, bottom; };
