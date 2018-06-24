@@ -11,7 +11,7 @@ xcode_scheme: yaft-cocoa
 # misc
 env:
   global:
-    - RELEASE_ID="$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+    - RELEASE_ID="$(git log --format=%h -1)"
     - RELEASE_FILE="yaft-cocoa-nightly-${RELEASE_ID}.tar.gz"
 cache:
   directories:
