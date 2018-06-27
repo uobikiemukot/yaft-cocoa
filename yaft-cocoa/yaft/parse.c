@@ -5,6 +5,7 @@
 #include "terminal.h"
 #include "esc.h"
 #include "csi.h"
+#include "osc.h"
 #include "dcs.h"
 
 void (*ctrl_func[CTRL_CHARS])(struct terminal_t *term) = {
@@ -117,6 +118,15 @@ void csi_sequence(struct terminal_t *term, uint8_t ch)
 	reset_esc(term);
 }
 
+int is_osc_parm(int c)
+{
+	if (isdigit(c) || isalpha(c) ||
+		c == '?' || c == ':' || c == '/' || c == '#')
+		return true;
+	else
+		return false;
+}
+
 void omit_string_terminator(char *bp, uint8_t ch)
 {
 	if (ch == BACKSLASH) /* ST: ESC BACKSLASH */
@@ -127,7 +137,29 @@ void omit_string_terminator(char *bp, uint8_t ch)
 
 void osc_sequence(struct terminal_t *term, uint8_t ch)
 {
+	struct parm_t parm;
+
+	omit_string_terminator(term->esc.bp, ch);
+
 	(void) ch;
+	logging(LOG_DEBUG, "osc: OSC %s\n", term->esc.buf);
+
+	reset_parm(&parm);
+	parse_arg(term->esc.buf + 1, &parm, ';', is_osc_parm); /* skip ']' */
+
+	if (parm.argc > 0) {
+		int osc_mode = dec2num(parm.argv[0]);
+		logging(LOG_DEBUG, "osc_mode:%d\n", osc_mode);
+
+		/* XXX: disable because this functions only work 24/32bpp
+			-> support other bpp (including pseudo color) */
+		if (osc_mode == 4)
+			set_palette(term, &parm);
+		else if (osc_mode == 104)
+			reset_palette(term, &parm);
+		if (osc_mode == 8900)
+			glyph_width_report(term, &parm);
+	}
 	reset_esc(term);
 }
 
