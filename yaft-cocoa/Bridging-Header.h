@@ -9,5 +9,6 @@
 #import "./yaft/terminal.h"
 #import "./yaft/esc.h"
 #import "./yaft/csi.h"
+#import "./yaft/osc.h"
 #import "./yaft/dcs.h"
 #import "./yaft/parse.h"
