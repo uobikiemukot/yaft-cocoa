@@ -36,7 +36,8 @@ before_deploy:
   - git config --local user.name "uobikiemukot"
   - git config --local user.email "uobikiemukot@gmail.com"
   - git tag "travis-${RELEASE_ID}"
-  - tar cf ${RELEASE_FILE} build/Release/yaft-cocoa.app
+  - cp -R build/Release/yaft-cocoa.app .
+  - tar cfz ${RELEASE_FILE} yaft-cocoa.app
 deploy:
   provider: releases
   api_key: ${GITHUB_TOKEN}
