@@ -21,10 +21,9 @@
 		497169BF20C96BB000190DA9 /* Yaft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497169BE20C96BB000190DA9 /* Yaft.swift */; };
 		49973B1120DF794D003D850E /* dcs.c in Sources */ = {isa = PBXBuildFile; fileRef = 49973B0F20DF794D003D850E /* dcs.c */; };
 		49973B1420E364AF003D850E /* osc.c in Sources */ = {isa = PBXBuildFile; fileRef = 49973B1320E364AF003D850E /* osc.c */; };
+		49BD1B71219CE5A000630F0C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD1B70219CE5A000630F0C /* main.swift */; };
 		49C8D9C520C899BE00DCF1FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D9C420C899BE00DCF1FB /* AppDelegate.swift */; };
 		49C8D9C720C899BF00DCF1FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C8D9C620C899BF00DCF1FB /* Assets.xcassets */; };
-		49C8D9CA20C899BF00DCF1FB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C8D9C820C899BF00DCF1FB /* MainMenu.xib */; };
-		49C8D9D320C89A3600DCF1FB /* YaftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D9D220C89A3600DCF1FB /* YaftView.swift */; };
 		49C8D9D520C89A4A00DCF1FB /* YaftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D9D420C89A4A00DCF1FB /* YaftController.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,13 +54,12 @@
 		49973B1020DF794D003D850E /* dcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dcs.h; sourceTree = "<group>"; };
 		49973B1220E364AF003D850E /* osc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osc.h; sourceTree = "<group>"; };
 		49973B1320E364AF003D850E /* osc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = osc.c; sourceTree = "<group>"; };
+		49BD1B70219CE5A000630F0C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		49C8D9C120C899BE00DCF1FB /* yaft-cocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "yaft-cocoa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C8D9C420C899BE00DCF1FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C8D9C620C899BF00DCF1FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		49C8D9C920C899BF00DCF1FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		49C8D9CB20C899BF00DCF1FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49C8D9CC20C899BF00DCF1FB /* yaft_cocoa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yaft_cocoa.entitlements; sourceTree = "<group>"; };
-		49C8D9D220C89A3600DCF1FB /* YaftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaftView.swift; sourceTree = "<group>"; };
 		49C8D9D420C89A4A00DCF1FB /* YaftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaftController.swift; sourceTree = "<group>"; };
 		49C8D9F520C89D2F00DCF1FB /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,14 +128,13 @@
 				4971699F20C96ACA00190DA9 /* yaft */,
 				49C8D9C420C899BE00DCF1FB /* AppDelegate.swift */,
 				49C8D9C620C899BF00DCF1FB /* Assets.xcassets */,
-				49C8D9C820C899BF00DCF1FB /* MainMenu.xib */,
-				49C8D9D220C89A3600DCF1FB /* YaftView.swift */,
 				497169BE20C96BB000190DA9 /* Yaft.swift */,
 				49C8D9D420C89A4A00DCF1FB /* YaftController.swift */,
 				494514E220D87FF700161858 /* Utility.swift */,
 				49C8D9CB20C899BF00DCF1FB /* Info.plist */,
 				49C8D9CC20C899BF00DCF1FB /* yaft_cocoa.entitlements */,
 				49C8D9F520C89D2F00DCF1FB /* Bridging-Header.h */,
+				49BD1B70219CE5A000630F0C /* main.swift */,
 			);
 			path = "yaft-cocoa";
 			sourceTree = "<group>";
@@ -202,7 +199,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C8D9C720C899BF00DCF1FB /* Assets.xcassets in Resources */,
-				49C8D9CA20C899BF00DCF1FB /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,10 +211,10 @@
 			files = (
 				49973B1120DF794D003D850E /* dcs.c in Sources */,
 				49973B1420E364AF003D850E /* osc.c in Sources */,
+				49BD1B71219CE5A000630F0C /* main.swift in Sources */,
 				497169BD20C96B4600190DA9 /* util.c in Sources */,
 				497169BB20C96B4600190DA9 /* osx.c in Sources */,
 				49C8D9D520C89A4A00DCF1FB /* YaftController.swift in Sources */,
-				49C8D9D320C89A3600DCF1FB /* YaftView.swift in Sources */,
 				49C8D9C520C899BE00DCF1FB /* AppDelegate.swift in Sources */,
 				494514E320D87FF700161858 /* Utility.swift in Sources */,
 				497169BF20C96BB000190DA9 /* Yaft.swift in Sources */,
@@ -234,17 +230,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		49C8D9C820C899BF00DCF1FB /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				49C8D9C920C899BF00DCF1FB /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		49C8D9CD20C899BF00DCF1FB /* Debug */ = {

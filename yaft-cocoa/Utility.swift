@@ -48,6 +48,12 @@ struct Utility {
         }
     }
 
+    func printUnicodeCodepoint(_ chars: String) {
+        for scalar in chars.unicodeScalars {
+            print(String(format: "codepoint U+%X", scalar.value))
+        }
+    }
+
     func handleKeyEvent(_ chars: String, _ commandKeyflag: Bool) -> String {
         guard commandKeyflag == false else {
             return handleKeyEventWithCommandKey(chars)
