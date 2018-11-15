@@ -2,14 +2,14 @@ import Cocoa
 
 class YaftController: NSViewController {
 
-    let yaft: Yaft = Yaft()
-    let utility: Utility = Utility()
-    let imageView: NSImageView = NSImageView()
+    private let yaft: Yaft = Yaft()
+    private let utility: Utility = Utility()
+    private let imageView: NSImageView = NSImageView()
 
-    let updateViewTimer = DispatchSource.makeTimerSource()
-    let checkChildTimer = DispatchSource.makeTimerSource()
-    var prevEventTimestamp: TimeInterval = 0.0
-    var commandKeyFlag = false
+    private let updateViewTimer = DispatchSource.makeTimerSource()
+    private let checkChildTimer = DispatchSource.makeTimerSource()
+    private var prevEventTimestamp: TimeInterval = 0.0
+    private var commandKeyFlag = false
 
     func sendPasteboardString() {
         // send clipboard string to terminal
@@ -106,10 +106,10 @@ class YaftController: NSViewController {
     }
 
     override func loadView() {
-        view = NSView(frame: NSRect(x: 0, y: 0, width: yaft.width + 10, height: yaft.height + 10))
+        view = NSView(frame: NSRect(x: 0, y: 0, width: Yaft.width + 10, height: Yaft.height + 10))
         view.wantsLayer = true
         view.layer?.backgroundColor = .black
-        imageView.frame = NSRect(x: 5, y: 5, width: yaft.width, height: yaft.height)
+        imageView.frame = NSRect(x: 5, y: 5, width: Yaft.width, height: Yaft.height)
         view.addSubview(imageView)
     }
 

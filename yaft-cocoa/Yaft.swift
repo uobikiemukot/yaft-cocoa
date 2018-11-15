@@ -2,14 +2,15 @@ import Cocoa
 
 // wrapper class of yaft core library (C API)
 class Yaft: NSObject {
-    let buf: UnsafeMutablePointer<UInt8>!
-    let bufSize: Int
-    let bytesPerRow: Int
-    let width: Int  = 1280
-    let height: Int = 768
+
+    private let buf: UnsafeMutablePointer<UInt8>!
+    private let bufSize: Int
+    private let bytesPerRow: Int
+    static let width: Int  = 1280
+    static let height: Int = 768
 
     override init() {
-        if !c_init(Int32(width), Int32(height)) {
+        if !c_init(Int32(Yaft.width), Int32(Yaft.height)) {
             print("c_init() failed")
             // bad manner?
             if let delegate = NSApplication.shared.delegate as? AppDelegate {
@@ -44,9 +45,9 @@ class Yaft: NSObject {
 
     func buildImage() -> NSImage {
         let data = Data(bytes: buf, count: bufSize)
-        let ciimage = CIImage(bitmapData: data, bytesPerRow: bytesPerRow, size: CGSize(width: width, height: height), format: kCIFormatRGBA8, colorSpace: nil)
+        let ciimage = CIImage(bitmapData: data, bytesPerRow: bytesPerRow, size: CGSize(width: Yaft.width, height: Yaft.height), format: kCIFormatRGBA8, colorSpace: nil)
         let rep = NSCIImageRep(ciImage: ciimage)
-        let nsimage = NSImage(size: NSSize(width: width, height: height))
+        let nsimage = NSImage(size: NSSize(width: Yaft.width, height: Yaft.height))
         nsimage.addRepresentation(rep)
         return nsimage
     }
