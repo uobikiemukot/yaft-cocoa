@@ -4,6 +4,7 @@ class YaftController: NSViewController {
 
     let yaft: Yaft = Yaft()
     let utility: Utility = Utility()
+    let imageView: NSImageView = NSImageView()
 
     let updateViewTimer = DispatchSource.makeTimerSource()
     let checkChildTimer = DispatchSource.makeTimerSource()
@@ -102,6 +103,14 @@ class YaftController: NSViewController {
 
         // start periodic jobs
         activateTimer()
+    }
+
+    override func loadView() {
+        view = NSView(frame: NSRect(x: 0, y: 0, width: yaft.width + 10, height: yaft.height + 10))
+        view.wantsLayer = true
+        view.layer?.backgroundColor = .black
+        imageView.frame = NSRect(x: 5, y: 5, width: yaft.width, height: yaft.height)
+        view.addSubview(imageView)
     }
 
 }
