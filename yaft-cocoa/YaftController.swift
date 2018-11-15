@@ -2,16 +2,13 @@ import Cocoa
 
 class YaftController: NSViewController {
 
-    let yaft: Yaft         = Yaft()
-    let yaftView: YaftView = YaftView()
-    let utility: Utility   = Utility()
+    let yaft: Yaft = Yaft()
+    let utility: Utility = Utility()
 
     let updateViewTimer = DispatchSource.makeTimerSource()
     let checkChildTimer = DispatchSource.makeTimerSource()
     var prevEventTimestamp: TimeInterval = 0.0
     var commandKeyFlag = false
-
-    @IBOutlet weak var imageView: NSImageView!
 
     func sendPasteboardString() {
         // send clipboard string to terminal
